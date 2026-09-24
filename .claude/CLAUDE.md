@@ -18,7 +18,7 @@ Rule 0 and the risk tiers are in `policy/risk-tiers.md`. Read them before changi
 ## Working in this repo
 
 - `main` is protected: every change goes through a PR with the right `tier:*` label.
-- Never add the `aakash-approved` label. Only Aakash adds it, by hand.
+- AI work (local sessions and routines) acts as the machine account `asenbot`. Never approve a PR and never use the human account `creativeasen` for writes: only Aakash approves HIGH-risk PRs, as creativeasen, on his phone.
 - Knowledge rows need an official source URL (from `knowledge/sources.md`) and a `Verified` date.
 - Keep `core/CLAUDE.md` under ~150 lines; details belong in skills.
 - Follow the current official Claude Code docs for plugin, skill, agent, command, and hook formats.

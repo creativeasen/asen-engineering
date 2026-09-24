@@ -7,7 +7,7 @@ A self-updating engineering system for ASEN Agency. Every ASEN project starts at
 - **Rules for every session**: core rules (`core/CLAUDE.md`) plus the current project's profile load automatically in every registered project.
 - **Skills**: detailed checklists per project type (website, SaaS, Shopify, mobile, n8n, AI features, Python bots) and per integration (Supabase, WhatsApp, Razorpay, Vercel/Railway, DPDP).
 - **Reviewers**: `security-reviewer`, `architect-reviewer`, `qa-tester`, and `knowledge-verifier` agents.
-- **Commands**: `/kickoff`, `/add-project`, `/remove-project`, `/plan-feature`, `/audit`, `/prelaunch`, `/handover`, `/incident`, `/lesson`.
+- **Commands**: `/kickoff`, `/add-project`, `/remove-project`, `/rollback`, `/plan-feature`, `/audit`, `/prelaunch`, `/handover`, `/incident`, `/lesson`.
 - **Safety hooks** (read-only, never change files): identity guard, secret guard, gitleaks scan before commits, typecheck/lint after edits.
 - **Templates**: each project type gets CI (typecheck, lint, tests, gitleaks, dependency audit, Claude security review), `.gitignore`, `.env.example`, `SECURITY.md`, and a PR template.
 - **Knowledge**: `knowledge/` holds versions, deadlines, and model advice. Every fact has an official source link and a "verified" date.
@@ -44,7 +44,7 @@ How it works:
 
 ## Add any project with /add-project
 
-```
+```text
 /add-project C:\Users\...\Documents\AI_WORK\my-project
 ```
 
@@ -62,7 +62,7 @@ Cloud routines run only for ASEN projects. Client and personal projects at `audi
 
 Open a terminal in the project folder and run, for an ASEN project:
 
-```
+```text
 claude plugin marketplace add creativeasen/asen-engineering --scope project && claude plugin install asen-engineering@asen --scope project
 ```
 
@@ -72,7 +72,7 @@ For a client or personal project, use `--scope local` in both places. This affec
 
 Open Claude Code in any registered ASEN folder (for example `Documents\AI_WORK\ASEN\asen-engineering`) and type:
 
-```
+```text
 /kickoff whatsapp-crm saas-webapp
 ```
 
@@ -82,7 +82,7 @@ Claude asks up to 5 short questions, registers the project, creates `ASEN\asen-w
 
 When something goes wrong or you learn something, type:
 
-```
+```text
 /lesson Webhook retries created duplicate orders because we didn't dedupe on the event ID
 ```
 
@@ -90,12 +90,14 @@ General lessons go to `knowledge/lessons.md` in this repo through a small PR (af
 
 ## Approve a HIGH-risk PR from your phone
 
-1. GitHub mobile app → **Notifications** (or this repo → **Pull requests**) → open the PR labeled **needs-aakash**.
-2. Read the PR Verifier's comment: *what you're deciding* + *AI recommendation*.
-3. To approve: tap **Labels** → add **`aakash-approved`**. The `risk-gate` check re-runs, and the PR merges once all checks pass.
-4. To reject: close the PR (optionally comment why).
+AI and routines work as the machine account **`asenbot`**; you are **`creativeasen`**. GitHub only lets a *different* person approve a PR, so a HIGH-risk change can only merge after **you** approve it.
 
-If new commits are pushed after you approve, the approval no longer counts and you'll be asked again.
+1. GitHub mobile app (signed in as **creativeasen**) → **Notifications** → open the PR labeled **needs-aakash**.
+2. Read the PR Verifier's comment: *what you're deciding* + *AI recommendation*.
+3. To approve: **Files changed** → **Review changes** → **Approve** → **Submit**. The `risk-gate` check re-runs and the PR merges once all checks pass.
+4. To reject: **Review changes** → **Request changes** (or close the PR).
+
+If new commits are pushed after you approve, your approval no longer counts and you'll be asked again.
 
 ## Read the weekly digest
 
@@ -109,7 +111,7 @@ Open [claude.ai/code/routines](https://claude.ai/code/routines), select a routin
 
 Every merge to `main` is tagged `merge-<PR number>`.
 
-- **One step:** open the bad PR on GitHub → **Revert**. GitHub creates a revert PR; it goes through the same checks (a revert of a HIGH-risk change needs your `aakash-approved` label).
+- **One step:** in any Claude Code session in an ASEN folder (or on claude.ai/code on your phone), type `/rollback <PR number>`. Claude (as asenbot) opens a revert PR; it goes through the same checks, and a revert of a HIGH-risk change needs your approval like any HIGH change.
 - **Pin a project to a known-good version** while you investigate:
   `claude plugin marketplace add creativeasen/asen-engineering@merge-<PR number> --scope project`
 

@@ -31,7 +31,7 @@ The PR diff (`git diff origin/main...HEAD` or `gh pr diff`), `knowledge/sources.
 
 ## Output (exact format)
 
-```
+```text
 VERDICT: APPROVE | REJECT | NEEDS-AAKASH
 TIER: low | medium | high
 CHECKS:

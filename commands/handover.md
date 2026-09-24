@@ -8,6 +8,7 @@ disable-model-invocation: true
 Write `docs/HANDOVER.md` in the project. Simple words, no secrets (names of env vars only).
 
 Sections:
+
 1. **What it is**: purpose, users, status.
 2. **Architecture**: components (frontend, API, workers, database, queues), where each is hosted, a small diagram in text.
 3. **Run locally**: prerequisites with versions (from `knowledge/stack.md`), install, env var names from `.env.example`, start commands, test commands.

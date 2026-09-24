@@ -1,0 +1,23 @@
+# High-risk paths (policy/risk-tiers.md). The main-branch ruleset requires creativeasen's review for these.
+/policy/                      @creativeasen
+/core/CLAUDE.md               @creativeasen
+/hooks/                       @creativeasen
+/scripts/                     @creativeasen
+/bin/                         @creativeasen
+/.claude-plugin/              @creativeasen
+/.claude/                     @creativeasen
+/.github/                     @creativeasen
+/agents/knowledge-verifier.md @creativeasen
+/knowledge/sources.md         @creativeasen
+/.gitignore                   @creativeasen
+/.gitattributes               @creativeasen
+/LICENSE                      @creativeasen
+/.markdownlint-cli2.jsonc     @creativeasen
+*.js                          @creativeasen
+*.mjs                         @creativeasen
+*.cjs                         @creativeasen
+*.ts                          @creativeasen
+*.py                          @creativeasen
+*.sh                          @creativeasen
+*.ps1                         @creativeasen
+/templates/                   

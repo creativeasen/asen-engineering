@@ -1,0 +1,54 @@
+name: repo-ci
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: repo-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  repo-ci:
+    name: repo-ci
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: 24
+      - name: JSON files are valid
+        run: git ls-files '*.json' | while read -r f; do node -e "JSON.parse(require('fs').readFileSync(process.argv[1],'utf8'))" "$f" || { echo "::error file=$f::invalid JSON"; exit 1; }; done
+      - name: YAML files are valid
+        run: python3 -c "import sys,yaml; [yaml.safe_load(open(f)) for f in sys.argv[1:]]; print('YAML ok')" $(git ls-files '*.yml' '*.yaml')
+      - name: Scripts parse
+        run: for f in $(git ls-files '*.mjs'); do node --check "$f"; done
+      - name: Every knowledge fact has an official source and a date
+        run: node scripts/ci/check-knowledge.mjs
+      - name: Plugin and marketplace load correctly
+        run: |
+          npm install -g @anthropic-ai/claude-code@2.1.281
+          claude plugin validate .claude-plugin/plugin.json --strict
+          claude plugin validate . --strict
+      - name: Markdown lint
+        uses: DavidAnson/markdownlint-cli2-action@21c1be1b93ad9ed58fa840aacc3f279cde2a72ff # v24.2.0
+        with:
+          globs: "**/*.md"
+      - name: Link check
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          fail: true
+          args: >-
+            --no-progress --max-retries 3 --timeout 20
+            --accept 200..=299,403,429
+            --exclude 'claude\.ai' --exclude 'asen-engineering-private' --exclude 'localhost'
+            --exclude 'example\.(com|org)' --exclude 'github\.com/.*/(settings|pull|issues|security)'
+            --exclude-path templates
+            './**/*.md'

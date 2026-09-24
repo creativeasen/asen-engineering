@@ -113,6 +113,10 @@ async function checkGh(command, start, viaPgh, cwd) {
   if (group === "auth" && /^(login|logout|switch|refresh|setup-git)$/.test(sub || "")) {
     block(`"gh auth ${sub}" changes the global GitHub account. The global default must never change.`);
   }
+  if (group === "pr" && sub === "merge") block("merging is done only by the auto-merge workflow after every check passes.");
+  if (group === "pr" && sub === "review" && /(^|\s)(-a|--approve)(\s|$)/.test(segment)) {
+    block("AI never approves pull requests; only Aakash does, as the human account.");
+  }
   let isWrite = GH_WRITES[group]?.test(sub || "") ?? false;
   if (group === "api") {
     const method = (/(?:-X|--method)[\s=]+(\w+)/i.exec(segment) || [])[1];

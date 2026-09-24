@@ -48,7 +48,7 @@ Changing Rule 0 or the registry rules in any way is always **HIGH** risk.
 
 ## High-risk paths (checked by the `risk-gate` workflow)
 
-```
+```text
 policy/**
 core/CLAUDE.md
 .claude/CLAUDE.md
@@ -63,6 +63,15 @@ knowledge/sources.md
 **/*.js  **/*.mjs  **/*.cjs  **/*.ts  **/*.py  **/*.sh  **/*.ps1   (outside templates/)
 ```
 
+## Who is who
+
+| Account | Used by | Can |
+| --- | --- | --- |
+| `creativeasen` | **Aakash only** (human) | Approve HIGH-risk PRs with a real GitHub review on his phone; admin settings. Never used by AI or routines. |
+| `asenbot` | AI and automation only (routines, local AI sessions) | Open branches, PRs, issues, and labels. Can never approve or merge a HIGH-risk PR. |
+
+HIGH-risk PRs merge only after `creativeasen` approves the latest commit. GitHub enforces this twice: the `main` ruleset requires a Code Owner review (`.github/CODEOWNERS`) for high-risk paths, and the `risk-gate` status requires the approval for any PR whose tier is high.
+
 ## Labels
 
 | Label | Meaning | Who sets it |
@@ -70,5 +79,4 @@ knowledge/sources.md
 | `tier:low` / `tier:medium` / `tier:high` | Risk tier | The PR author (routine), corrected by the PR Verifier and `risk-gate` (path-based) |
 | `ai-verified` | The knowledge-verifier checked every claim and approved | PR Verifier routine only |
 | `needs-aakash` | HIGH risk: waiting for Aakash | PR Verifier or `risk-gate` |
-| `aakash-approved` | Aakash approved a HIGH-risk PR | **Only Aakash, by hand on GitHub** (see README) |
 | `external` | Opened by someone outside ASEN; never auto-merged | `risk-gate` |

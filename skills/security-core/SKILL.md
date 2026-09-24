@@ -10,6 +10,7 @@ Versions: `${CLAUDE_PLUGIN_ROOT}/knowledge/stack.md`. Open risks: `${CLAUDE_PLUG
 ## Threat model first
 
 For each feature, write 3–5 lines in the plan:
+
 - Who can call this? What if they're logged out, another tenant, or a bot?
 - What's the worst thing an attacker could make it do (read others' data, send 10,000 messages, refund money, run up an AI bill)?
 - What limits stop that (authz check, rate limit, quota, idempotency, approval)?
