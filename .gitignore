@@ -1,0 +1,18 @@
+# Secrets: never commit real env files
+.env
+.env.*
+!.env.example
+
+# Local Claude Code settings (per machine)
+.claude/settings.local.json
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Dependencies and build output
+node_modules/
+dist/
+*.log

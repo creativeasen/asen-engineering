@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "asen",
+  "description": "ASEN Agency plugin marketplace",
+  "owner": { "name": "ASEN Agency", "url": "https://github.com/creativeasen" },
+  "plugins": [
+    {
+      "name": "asen-engineering",
+      "source": "./",
+      "description": "ASEN Agency engineering rules, skills, reviewers, and read-only safety hooks.",
+      "category": "development"
+    }
+  ]
+}

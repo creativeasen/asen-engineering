@@ -1,0 +1,12 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "asen-engineering",
+  "displayName": "ASEN Engineering",
+  "version": "0.1.0",
+  "description": "ASEN Agency engineering rules, skills, reviewers, and read-only safety hooks for professional-grade projects.",
+  "author": { "name": "ASEN Agency", "url": "https://github.com/creativeasen" },
+  "homepage": "https://github.com/creativeasen/asen-engineering",
+  "repository": "https://github.com/creativeasen/asen-engineering",
+  "license": "MIT",
+  "keywords": ["security", "supabase", "saas", "whatsapp", "razorpay", "shopify", "dpdp"]
+}

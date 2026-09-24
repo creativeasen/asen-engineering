@@ -1,0 +1,20 @@
+# Secrets: never commit real env files
+.env
+.env.*
+!.env.example
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/*
+!.vscode/extensions.json
+.idea/
+
+# Logs and reports
+*.log
+coverage/
+
+# n8n local data (contains credentials and executions)
+.n8n/
+n8n-data/
+node_modules/
