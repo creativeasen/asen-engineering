@@ -2,12 +2,13 @@
 // CI: the public repo must contain no email addresses and no blocklisted words (client names, personal
 // project names, private repo names). The blocklist comes from the PUBLIC_BLOCKLIST secret, never from the repo.
 // Matches are reported by file:line and term NUMBER only, because CI logs of a public repo are public.
-// Usage: node scripts/ci/check-public-safety.mjs [base-sha]   (with base-sha, also checks the PR's commit emails)
+// Usage: node scripts/ci/check-public-safety.mjs [base-sha head-sha]   (also checks the PR's own commits:
+// authors, committers, and messages; GitHub's temporary merge commit is excluded on purpose)
 
 import { execFileSync } from "node:child_process";
 import { readFileSync } from "node:fs";
 
-const ALLOWED_EMAIL = /@(users\.noreply\.github\.com|example\.(com|org)|anthropic\.com)$|^git@github\.com$/i;
+const ALLOWED_EMAIL = /@(users\.noreply\.github\.com|example\.(com|org)|anthropic\.com)$|^(git|noreply)@github\.com$/i;
 const EMAIL = /[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g;
 const SKIP = /\.(png|jpe?g|gif|ico|pdf|zip|gz|woff2?)$/i;
 
@@ -32,9 +33,9 @@ for (const f of files) {
 }
 
 // Commit author/committer emails and messages in the PR must be clean too.
-const base = process.argv[2];
+const [base, head = "HEAD"] = process.argv.slice(2);
 if (base) {
-  const log = execFileSync("git", ["log", "--format=%ae%n%ce%n%B%n--END--", `${base}..HEAD`], { encoding: "utf8" });
+  const log = execFileSync("git", ["log", "--no-merges", "--format=%ae%n%ce%n%B%n--END--", `${base}..${head}`], { encoding: "utf8" });
   for (const m of log.matchAll(EMAIL)) if (!ALLOWED_EMAIL.test(m[0])) problems.push("a commit in this PR uses or mentions a non-noreply email");
   const low = log.toLowerCase();
   blocklist.forEach((w, n) => { if (low.includes(w)) problems.push(`a commit message in this PR contains blocklisted term #${n + 1}`); });

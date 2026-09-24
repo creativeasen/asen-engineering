@@ -33,4 +33,4 @@ jobs:
           PUBLIC_BLOCKLIST: ${{ secrets.PUBLIC_BLOCKLIST }}
         run: |
           rm -f gitleaks
-          node scripts/ci/check-public-safety.mjs ${{ github.event.pull_request.base.sha }}
+          node scripts/ci/check-public-safety.mjs ${{ github.event.pull_request.base.sha }} ${{ github.event.pull_request.head.sha }}
