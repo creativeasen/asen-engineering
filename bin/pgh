@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# pgh: run gh as the GitHub account registered for the current project folder.
+# The token comes from the gh keyring for this one command; the global default account never changes.
+set -euo pipefail
+here="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+account="$(node "$here/../scripts/asen-project.mjs" account "$PWD")" || exit 1
+token="$(gh auth token --user "$account")" || { echo "pgh: no gh login for $account" >&2; exit 1; }
+GH_TOKEN="$token" exec gh "$@"

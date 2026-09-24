@@ -8,4 +8,4 @@ Each digest has, in simple English:
 2. **What changed this week** and why, with PR links.
 3. **Coming up**: deadlines in the next 30 days from the security watchlist.
 
-Digests in this public folder never contain private information. Project-specific notes go to the private repo (`audit-reports/digest-YYYY-WW-private.md`).
+Digests in this public folder never contain private information. Project-specific notes go to the private repo (`asen/audits/digest-YYYY-WW-private.md`).

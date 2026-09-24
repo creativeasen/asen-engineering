@@ -5,7 +5,7 @@ disable-model-invocation: true
 
 # /prelaunch
 
-Rule 0 applies: ASEN repos only.
+Rule 0 applies: registered projects only (`/add-project`).
 
 1. Identify the project type and integrations; load those ASEN skills plus `security-core` and `dpdp-compliance`.
 2. Go through the **Pre-launch checklist** section of every loaded skill. For each item: ✅ verified (how), ❌ missing, or ⚠️ can't verify here (what Aakash must check).

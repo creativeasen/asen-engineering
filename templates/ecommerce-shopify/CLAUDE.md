@@ -1,12 +1,12 @@
 # <PROJECT NAME> (E-commerce on Shopify)
 
-ASEN project. The `asen-engineering` plugin is enabled for this folder at project scope; its core rules load automatically at the start of every session.
+Project registered in the ASEN project registry (via `/add-project`). The `asen-engineering` plugin is enabled for this folder; its core rules and this project's profile load automatically at the start of every session.
 
 ## Identity (Rule 0)
 
-- This folder is `ASEN\asen-<name>`, so git commits and pushes as `creativeasen`.
-- Run gh as `GH_TOKEN=$(gh auth token --user creativeasen) gh ...`. Never switch the global gh account.
-- Never touch client repos or folders that don't start with `asen-`.
+- git commits and pushes as this project's registered GitHub account automatically.
+- Use `pgh` for gh commands (it picks the registered account). Never switch the global gh account.
+- Write only to this project's registered repos. Never touch other projects or clients.
 
 ## Skills to use
 

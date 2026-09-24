@@ -6,10 +6,11 @@ Rule 0 and the risk tiers are in `policy/risk-tiers.md`. Read them before changi
 
 ## GitHub identity
 
-- `git` in `ASEN\asen-*` folders commits and pushes as `creativeasen` automatically (git `includeIf`). Never add `-c` overrides or `GIT_*` identity variables.
-- Run every `gh` command with the creativeasen token from the keyring, per command:
+- This repo is registered in the private project registry with account `creativeasen`; git commits and pushes as creativeasen here automatically. Never add `-c` overrides or `GIT_*` identity variables.
+- Run gh through `pgh` (it uses the registered account), or with the token per command:
   - Bash: `GH_TOKEN=$(gh auth token --user creativeasen) gh <command>`
   - PowerShell: `$env:GH_TOKEN = (gh auth token --user creativeasen); gh <command>`
+- Never write anything about a client or personal project here; the registry and all project-specific notes live in `asen-engineering-private`.
 - Never run `gh auth switch`, `gh auth login`, `gh auth logout`, or `gh auth setup-git`: the global default account must not change.
 - Never write a token to a file, log, or commit.
 - The identity guard (`hooks/identity-guard.mjs`) blocks pushes and gh writes that break these rules. If it blocks you, stop and tell Aakash.

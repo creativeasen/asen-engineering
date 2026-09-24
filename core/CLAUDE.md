@@ -1,14 +1,14 @@
 # ASEN Engineering: core rules (non-negotiable)
 
-These rules apply to every ASEN project. Details live in the ASEN skills; load the matching one.
+These rules apply to every project registered with ASEN Engineering (ASEN, personal, or client). Details live in the ASEN skills; load the matching one.
 
-## Rule 0: client separation (highest priority)
+## Rule 0: project isolation (highest priority)
 
-- Never create, edit, push, comment on, or open issues/PRs in any client repo or client GitHub account.
-- Never read, modify, or change git or gh settings for any folder whose name does not start with `asen-`.
-- In ASEN repos every GitHub action runs as `creativeasen` on `creativeasen` repos. Run gh as
-  `GH_TOKEN=$(gh auth token --user creativeasen) gh ...` (PowerShell: `$env:GH_TOKEN = (gh auth token --user creativeasen); gh ...`).
-- Never run `gh auth switch|login|logout|setup-git`. Never add `-c` or `GIT_*` identity overrides.
+- Nothing happens in a project that isn't in the private project registry with Aakash's approval. In an unregistered folder, don't read or change git/gh settings and don't write to GitHub; suggest `/add-project`.
+- Each project uses only its registered GitHub account, writes only to its registered repos, and stays within its automation level (shown below under "This project").
+- Use `pgh` for gh commands (it picks the project's account), or `GH_TOKEN=$(gh auth token --user <account>) gh ...`.
+- Information never crosses between projects or clients. Nothing about clients or personal projects goes into the public `asen-engineering` repo.
+- Never run `gh auth switch|login|logout|setup-git`: the global default account never changes. Never add `-c` or `GIT_*` identity overrides.
 - If the identity guard blocks something, stop and tell Aakash. Do not work around it.
 
 ## How we work

@@ -1,6 +1,6 @@
 # General lessons
 
-Short, general lessons learned while building. **No client names, project names, people, or private data here** (this repo is public). Lessons that mention a specific project go in the private repo's `private-lessons.md`.
+Short, general lessons learned while building. **No client names, project names, people, or private data here** (this repo is public). Lessons that mention a specific project go in the private repo, in that project's owner folder.
 
 Add a lesson with `/lesson`. The Weekly Upgrade routine turns lessons that repeat into rules, skill checklist items, or CI checks.
 

@@ -17,6 +17,7 @@ Lesson: `$ARGUMENTS` (if empty, ask Aakash for one sentence).
    - If a matching lesson already exists in `knowledge/lessons.md`, increase its "seen N times" instead of adding a duplicate. Otherwise append:
      `- YYYY-MM-DD | area | lesson | seen 1 time`
    - Commit, push, then open a PR as creativeasen:
-     `GH_TOKEN=$(gh auth token --user creativeasen) gh pr create --title "lesson: <short>" --body "<why>" --label tier:low`
-4. **Private (specific)**, in `%USERPROFILE%\Documents\AI_WORK\ASEN\asen-engineering-private`: append to `private-lessons.md` in the same format with the project name, commit, and push.
+     `pgh pr create --title "lesson: <short>" --body "<why>" --label tier:low`
+   - Before committing, check the lesson against the blocklist: `node "${CLAUDE_PLUGIN_ROOT}/scripts/asen-project.mjs" blocklist` must not match any word in it.
+4. **Private (specific)**, in `%USERPROFILE%\Documents\AI_WORK\ASEN\asen-engineering-private`: append to the current project's owner folder only (`asen/lessons.md`, `personal/<id>/lessons.md`, or `clients/<name>/lessons.md`, as shown in the project profile) in the same format with the project name, then commit and push. Never write into another client's folder.
 5. Tell Aakash where it was saved, with the PR link if one was made.
