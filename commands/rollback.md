@@ -16,6 +16,6 @@ Work in `%USERPROFILE%\Documents\AI_WORK\ASEN\asen-engineering` (git and `pgh` a
 4. `git push -u origin rollback/pr-<N>`, then open the PR:
    `pgh pr create --title "rollback: revert #<N>" --body "Reverts #<N> (<title>). Reason: <reason>." --label tier:<tier>`
    (Use the tier of the original PR; the risk gate raises it if the files require more.)
-5. Tell Aakash the PR link. LOW/MEDIUM reverts still need the PR Verifier's `ai-verified`; HIGH reverts need his **Approve** on the phone.
+5. Tell Aakash the PR link. LOW/MEDIUM reverts still need the PR Verifier's `ai-verified`; HIGH reverts need Aakash's **Approve** on the phone.
 
 Never push to `main` directly and never force-push.
