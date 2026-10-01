@@ -3,9 +3,9 @@
 //   node scripts/asen-autoregister.mjs scan           find new project folders and register / ask
 //   node scripts/asen-autoregister.mjs install-task   create the hourly Windows scheduled task
 // Rules (Aakash, 2026-10-01):
-//   - New project folders under AI_WORK\ASEN (not 2_Clients, not the 0_/1_/3_ admin folders) are registered
+//   - New project folders under AI_WORK\ASEN (not the clients folder, not the numbered business folders) are registered
 //     automatically at automation "rules-only" (ASEN rules + knowledge digest; account asenbot; no automation).
-//   - New client (ASEN\2_Clients\*) or personal (AI_WORK\* outside ASEN) folders: ONE yes/no question, as a GitHub
+//   - New client (inside ASEN's numbered clients folder) or personal (AI_WORK\* outside ASEN) folders: ONE yes/no question, as a GitHub
 //     issue in the private repo (phone notification). "yes" → rules-only with the git identity unchanged; "no" → never again.
 //   - Folders that existed when this was set up are a baseline and are never asked about.
 // State and the registry live in the private repo. Nothing here reads a project's files beyond "is this a project?".
@@ -50,7 +50,7 @@ function candidates() {
   const out = [];
   for (const d of subdirs(ASEN)) {
     const name = path.basename(d);
-    if (name === "2_Clients") { for (const c of subdirs(d)) if (isProject(c)) out.push({ dir: c, kind: "client" }); continue; }
+    if (/^\d+_clients$/i.test(name)) { for (const c of subdirs(d)) if (isProject(c)) out.push({ dir: c, kind: "client" }); continue; }
     if (/^\d+_/.test(name)) continue; // 0_Admin, 1_Leads, 3_Templates: business folders, not projects
     if (isProject(d)) out.push({ dir: d, kind: "asen" });
   }
