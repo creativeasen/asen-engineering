@@ -11,3 +11,4 @@ Format: `- YYYY-MM-DD | area | lesson (one or two sentences) | seen N times`
 - 2026-09-24 | tooling | Plugins don't load a `CLAUDE.md` from the plugin folder; ship always-on rules through a SessionStart hook or a skill. | seen 1 time
 - 2026-09-24 | identity | When one machine uses two GitHub accounts, scope the second account by folder (git `includeIf`) and borrow its token per command, instead of switching the global account. | seen 1 time
 - 2026-09-24 | windows | Node scripts on Windows can crash when they call `process.exit()` right after a `fetch`; set `process.exitCode` and let the script end. | seen 1 time
+- 2026-09-25 | github | A ruleset with 0 required approvals plus "require review from Code Owners" lets low-risk PRs auto-merge while PRs touching CODEOWNERS paths still need a human review. | seen 1 time
