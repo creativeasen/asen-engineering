@@ -186,8 +186,9 @@ async function main() {
 
   const gitPush = /\bgit(?:\.exe)?(?:\s+-C\s+("[^"]+"|'[^']+'|\S+)|\s+-c\s+\S+|\s+--[\w-]+(?:=\S+)?)*\s+push\b/g;
   for (const m of command.matchAll(gitPush)) await checkGitPush(command, m, cwd);
-  for (const m of command.matchAll(/(?:^|[\s;&|(])(p?gh)(?:\.exe)?\s+[a-z]/g)) {
-    const start = m.index + m[0].indexOf(m[1]);
+  // Also match path forms such as ./bin/pgh or /usr/bin/gh, so a path prefix can't skip the checks.
+  for (const m of command.matchAll(/(?:^|[\s;&|(])(?:[^\s;&|()]*[\\/])?(p?gh)(?:\.exe)?\s+[a-z]/g)) {
+    const start = m.index + m[0].lastIndexOf(m[1]);
     await checkGh(command, start, m[1] === "pgh", cwd);
   }
 }

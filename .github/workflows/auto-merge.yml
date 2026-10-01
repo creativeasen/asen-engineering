@@ -1,9 +1,10 @@
 name: auto-merge
 
-# When CI finishes for a PR, merge it if every rule in policy/risk-tiers.md is met, then tag the merge.
+# When CI or the risk gate finishes for a PR, merge it if every rule in policy/risk-tiers.md is met, then tag the merge.
+# risk-gate is included so a late `ai-verified` label or a late human approval also leads to a merge (pr-gate re-checks everything).
 on:
   workflow_run:
-    workflows: [repo-ci, public-safety]
+    workflows: [repo-ci, public-safety, risk-gate]
     types: [completed]
 
 permissions:
@@ -16,7 +17,7 @@ permissions:
 jobs:
   merge:
     name: auto-merge
-    if: github.event.workflow_run.event == 'pull_request' && github.event.workflow_run.conclusion == 'success'
+    if: contains(fromJSON('["pull_request","pull_request_target","pull_request_review"]'), github.event.workflow_run.event) && github.event.workflow_run.conclusion == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
