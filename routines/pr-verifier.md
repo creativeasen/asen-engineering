@@ -22,7 +22,7 @@ Goal: independently check every system-update PR and label it. You are skeptical
 5. Act on the verdict:
    - **LOW or MEDIUM and everything confirmed** → add `ai-verified` and post a short comment listing each claim, its source, and "confirmed".
    - **Wrong or unverified** → request changes (or close if it's unfixable) with a comment giving the exact reason and what source would be needed. Remove `ai-verified` if present.
-   - **HIGH** → add `needs-aakash`, do **not** add `ai-verified`, and post a comment:
+   - **HIGH** → add `needs-aakash`, **request a review from `creativeasen`** (so Aakash gets a GitHub phone notification), do **not** add `ai-verified`, and post a comment:
 
      ```text
      Needs Aakash: <one-line title>

@@ -2,6 +2,14 @@
 
 All notable changes to ASEN Engineering. Each merged PR is also tagged (`merge-<PR number>`), so any version can be restored.
 
+## 0.4.0 (2026-10-01)
+
+- **Knowledge flows into every session automatically.** At session start (registered projects only) the plugin fast-forwards the local `asen-engineering`, `asen-radar` and private clones (bounded, silent), then adds a small **ASEN knowledge digest** for this project's own stack: outdated or deprecated packages, deadlines and advisories, radar stack status (Keep / Watch / Switch), best right now, and the default Claude model.
+- **Cross-check**: new `stack-crosscheck` skill and `scripts/asen-knowledge.mjs check <name>`; a hook adds context on package installs and dependency-file edits. Claude applies LOW/MEDIUM improvements and reports them in one line.
+- **Auto-update**: the `asen` marketplace is set to `autoUpdate`; a throttled background update also runs at session start.
+- **Auto-register**: `scripts/asen-autoregister.mjs` (hourly task + session start) registers new ASEN folders at `rules-only`, and asks once (GitHub issue, phone notification) for new client/personal folders.
+- HIGH-risk PRs request a review from `creativeasen` so the approval request reaches the phone.
+
 ## 0.3.0 (2026-09-25)
 
 - Safety rails: `main` ruleset (PR required, required checks, Code Owner review for high-risk paths, no force-push or deletion, no bypass for admins).

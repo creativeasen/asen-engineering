@@ -1,11 +1,18 @@
 {
-  "description": "ASEN read-only safety hooks: core rules at start, identity guard, secret guard, gitleaks before commit, typecheck/lint after edits.",
+  "description": "ASEN safety + knowledge hooks: core rules and a project knowledge digest at start (with silent knowledge sync), identity guard, secret guard, gitleaks before commit, package cross-check, typecheck/lint after edits.",
   "hooks": {
     "SessionStart": [
       {
         "matcher": "startup|resume|clear|compact",
         "hooks": [
-          { "type": "command", "command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/hooks/load-core-rules.mjs"], "timeout": 10 }
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/hooks/load-core-rules.mjs"
+            ],
+            "timeout": 30
+          }
         ]
       }
     ],
@@ -13,14 +20,46 @@
       {
         "matcher": "Bash|PowerShell",
         "hooks": [
-          { "type": "command", "command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/hooks/identity-guard.mjs"], "timeout": 30, "statusMessage": "ASEN identity guard" },
-          { "type": "command", "command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/hooks/pre-commit-scan.mjs"], "timeout": 60, "statusMessage": "ASEN gitleaks scan" }
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/hooks/identity-guard.mjs"
+            ],
+            "timeout": 30,
+            "statusMessage": "ASEN identity guard"
+          },
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/hooks/pre-commit-scan.mjs"
+            ],
+            "timeout": 60,
+            "statusMessage": "ASEN gitleaks scan"
+          },
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/hooks/knowledge-check.mjs"
+            ],
+            "timeout": 15,
+            "statusMessage": "ASEN knowledge cross-check"
+          }
         ]
       },
       {
         "matcher": "Write|Edit|MultiEdit|NotebookEdit",
         "hooks": [
-          { "type": "command", "command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/hooks/secret-guard.mjs"], "timeout": 10 }
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/hooks/secret-guard.mjs"
+            ],
+            "timeout": 10
+          }
         ]
       }
     ],
@@ -28,7 +67,28 @@
       {
         "matcher": "Write|Edit|MultiEdit",
         "hooks": [
-          { "type": "command", "command": "node", "args": ["${CLAUDE_PLUGIN_ROOT}/hooks/post-edit-check.mjs"], "timeout": 180, "asyncRewake": true }
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/hooks/post-edit-check.mjs"
+            ],
+            "timeout": 180,
+            "asyncRewake": true
+          }
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node",
+            "args": [
+              "${CLAUDE_PLUGIN_ROOT}/hooks/knowledge-check.mjs"
+            ],
+            "timeout": 15
+          }
         ]
       }
     ]
