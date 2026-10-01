@@ -49,14 +49,14 @@ Every row was checked on an official source (see `sources.md`). Each row needs a
 
 | Item | Use | Latest seen | Notes | Source | Verified |
 | --- | --- | --- | --- | --- | --- |
-| n8n | 2.x | 2.40.6 (2026-09-24) | Self-hosted: keep updated; n8n has had critical advisories. | https://github.com/n8n-io/n8n/releases | 2026-09-24 |
+| n8n | 2.x | 2.41.5 (2026-10-01, latest stable; 2.42.x is pre-release) | Self-hosted: keep updated; n8n has had critical advisories. | https://github.com/n8n-io/n8n/releases | 2026-10-01 |
 | Meta Graph API (WhatsApp Cloud API) | v26.0 | v26.0 (introduced 2026-07-29) | v25.0 available until 2028-07-29. v20.0 expires 2026-09-24. Pin the version in the URL. | https://developers.facebook.com/docs/graph-api/changelog/ | 2026-09-24 |
 | Razorpay Node SDK | `razorpay` 2.x | 2.9.8 | Webhooks: HMAC-SHA256 of the raw body in `X-Razorpay-Signature`; dedupe on `x-razorpay-event-id`. | https://razorpay.com/docs/webhooks/validate-test/ | 2026-09-24 |
 | Shopify Admin API | 2026-07 (stable) | 2026-10 releases 2026-10-01 | Each version is supported for at least 12 months. 2025-10 stops being accessible 2026-10-16. | https://shopify.dev/docs/api/usage/versioning | 2026-09-24 |
 | Shopify API library | `@shopify/shopify-api` 15.x | 15.0.0 | | https://registry.npmjs.org/@shopify%2Fshopify-api/latest | 2026-09-24 |
 | Shopify CLI | `@shopify/cli` 4.x | 4.8.2 | | https://registry.npmjs.org/@shopify%2Fcli/latest | 2026-09-24 |
 | Resend | `resend` 6.x | 6.28.1 | Transactional email. | https://registry.npmjs.org/resend/latest | 2026-09-24 |
-| Anthropic SDK (JS) | `@anthropic-ai/sdk` | 0.128.0 | Model choice: see `models.md`. | https://registry.npmjs.org/@anthropic-ai%2Fsdk/latest | 2026-09-24 |
+| Anthropic SDK (JS) | `@anthropic-ai/sdk` | 0.131.0 | Model choice: see `models.md`. Sonnet 4.5 is deprecated in the client ([v0.131.0 release notes](https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.131.0)). | https://registry.npmjs.org/@anthropic-ai%2Fsdk/latest | 2026-10-01 |
 | Anthropic SDK (Python) | `anthropic` | 1.8.0 | | https://pypi.org/project/anthropic/ | 2026-09-24 |
 
 ## Hosting and edge
