@@ -1,11 +1,14 @@
 #!/usr/bin/env node
-// SessionStart: print core/CLAUDE.md plus THIS project's registry profile, so Claude Code adds them to context.
-// Only the current project's entry is printed, never other projects or clients. Read-only; never blocks a session.
+// SessionStart: print core/CLAUDE.md, THIS project's registry profile and an ASEN knowledge digest for its stack,
+// so Claude Code adds them to context. Only the current project's entry is printed, never other projects or clients.
+// Before the digest it fast-forwards the three ASEN knowledge clones (bounded, silent) and starts two throttled
+// background jobs: plugin update and the auto-register scan. It never changes project code and never blocks a session.
 
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { findProject, loadRegistry } from "./lib/registry.mjs";
+import { buildDigest, CLONES, detached, due, syncClones } from "./lib/knowledge.mjs";
 
 const root = process.env.CLAUDE_PLUGIN_ROOT || path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -30,6 +33,17 @@ if (project) {
 - Automation level: ${project.automation}
 - Private notes and lessons for this project go to \`asen-engineering-private/${notes}\` only.
 ${project.owner === "asen" ? "" : "- This is not an ASEN project: never use, mention, or copy information from any other project or client, and never put anything from it in the public repo.\n"}`;
+  if (project.automation !== "off") {
+    try {
+      if (due("knowledge-sync", 30)) await syncClones();
+      if (due("plugin-update", 360)) detached("claude plugin marketplace update asen && claude plugin update asen-engineering@asen");
+      const scan = path.join(CLONES.engineering, "scripts", "asen-autoregister.mjs");
+      if (due("autoregister", 60)) detached(`node "${scan}" scan`);
+      out += `
+${buildDigest(cwd, project, { scriptPath: path.join(root, "scripts", "asen-knowledge.mjs") })}
+`;
+    } catch { /* knowledge is best-effort; never block a session */ }
+  }
 } else {
   out += `
 ## This folder is NOT in the ASEN project registry

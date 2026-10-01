@@ -40,6 +40,14 @@ These rules apply to every project registered with ASEN Engineering (ASEN, perso
 - Before adding any package: confirm it exists on the official registry, is actively maintained, and is widely used. AI models invent package names; check first.
 - Prefer the versions in `knowledge/stack.md` of the asen-engineering repo.
 
+## Knowledge (automatic, no reminders needed)
+
+- Each session starts with an **ASEN knowledge digest** for this project (stack issues, deadlines, advisories, radar status, best right now). Treat it as current, dated facts.
+- **Cross-check** before planning a feature, choosing a library/tool/model/API, adding a package, or writing integration code: use the digest and the `stack-crosscheck` skill. Package installs and dependency-file edits are also checked by a hook.
+- Apply the better option yourself when it is LOW/MEDIUM risk (current version instead of an old one, non-deprecated API, advisory fix). Major upgrades and anything HIGH: propose, don't force.
+- Then tell Aakash in **one line**: `Knowledge check: changed X → Y because Z (source).` Say nothing when nothing changed.
+- HIGH-risk PRs: open them with `--reviewer creativeasen` so the request reaches Aakash's phone as a GitHub notification. LOW/MEDIUM PRs merge automatically after verification.
+
 ## Before saying "done"
 
 - Typecheck, lint, and tests pass. New logic has tests.

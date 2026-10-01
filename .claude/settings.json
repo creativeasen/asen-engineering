@@ -5,7 +5,8 @@
       "source": {
         "source": "github",
         "repo": "creativeasen/asen-engineering"
-      }
+      },
+      "autoUpdate": true
     }
   },
   "enabledPlugins": {
