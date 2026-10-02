@@ -165,7 +165,9 @@ async function scan() {
 
 function installTask() {
   const cmdFile = path.join(LOG_DIR, "autoregister.cmd");
-  writeFileSync(cmdFile, `@echo off\r\ncd /d "${PRIVATE}"\r\n"${process.execPath}" "${path.join(path.dirname(path.dirname(REG_TOOL)), "scripts", "asen-autoregister.mjs")}" scan\r\n`);
+  // Same hourly task also runs the Project Brain collector (facts only, no Claude; catches up after the PC was off).
+  const scripts = path.join(path.dirname(path.dirname(REG_TOOL)), "scripts");
+  writeFileSync(cmdFile, `@echo off\r\ncd /d "${PRIVATE}"\r\n"${process.execPath}" "${path.join(scripts, "asen-autoregister.mjs")}" scan\r\n"${process.execPath}" "${path.join(scripts, "asen-brain.mjs")}" collect\r\n`);
   const r = spawnSync("schtasks", ["/Create", "/F", "/SC", "HOURLY", "/TN", "ASEN auto-register", "/TR", `"${cmdFile}"`], { encoding: "utf8", windowsHide: true });
   console.log(r.status === 0 ? `Scheduled task "ASEN auto-register" created (hourly) -> ${cmdFile}` : `schtasks failed: ${r.stderr || r.stdout}`);
 }
