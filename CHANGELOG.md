@@ -2,6 +2,12 @@
 
 All notable changes to ASEN Engineering. Each merged PR is also tagged (`merge-<PR number>`), so any version can be restored.
 
+## 0.5.0 (2026-10-02)
+
+- **Project Brain**: one shared, always-updated memory of every project. `scripts/asen-brain.mjs collect` runs hourly with the auto-register task (facts only, no Claude): new commits, changed files, dependency changes, the project's own README/CLAUDE.md/progress/TODO notes, new TODOs; credentials are redacted. Facts, summaries, plans and an overview live in the private repo, inside each owner's folder.
+- The **session digest** now includes the project's brain summary (goal, recent work, open problems, radar ideas) and asks Claude to refresh the summary when the facts are newer.
+- Unregistered project folders are **never read**: they are listed for one yes/no question (sent by the radar email); "no" is permanent.
+
 ## 0.4.0 (2026-10-01)
 
 - **Knowledge flows into every session automatically.** At session start (registered projects only) the plugin fast-forwards the local `asen-engineering`, `asen-radar` and private clones (bounded, silent), then adds a small **ASEN knowledge digest** for this project's own stack: outdated or deprecated packages, deadlines and advisories, radar stack status (Keep / Watch / Switch), best right now, and the default Claude model.

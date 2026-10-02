@@ -7,6 +7,7 @@ import { execFile, spawn } from "node:child_process";
 import os from "node:os";
 import path from "node:path";
 import { registryFile } from "./registry.mjs";
+import { brainDigest } from "./brain.mjs";
 
 export const ASEN_DIR = path.dirname(path.dirname(path.dirname(registryFile())));
 export const CLONES = {
@@ -195,10 +196,13 @@ export function buildDigest(dir, project, { scriptPath } = {}) {
 
   if (k.radar?.alerts?.length) lines.push(`**Radar alerts (14 days):** ${k.radar.alerts.map((a) => `${a.date} ${a.title}`).join("; ").slice(0, 300)}`);
 
+  const brain = brainDigest(CLONES.private, project);
+  if (brain) lines.push(brain);
+
   lines.push("**Cross-check rule:** before planning a feature, choosing a library/tool/model/API, adding a package, or writing integration code, check this digest" +
     (scriptPath ? ` and run \`node "${scriptPath}" check <package-or-tool>...\`` : "") +
     ". Apply the better, current, non-deprecated option when it is LOW/MEDIUM risk; propose (don't force) major upgrades. Then tell Aakash in ONE line: what you changed and why, with the source.");
   let text = lines.join("\n");
-  if (text.length > 3500) text = `${text.slice(0, 3450)}\n…(digest trimmed)`;
+  if (text.length > 4600) text = `${text.slice(0, 4550)}\n…(digest trimmed)`;
   return text;
 }
