@@ -3,12 +3,15 @@
 // so Claude Code adds them to context. Only the current project's entry is printed, never other projects or clients.
 // Before the digest it fast-forwards the three ASEN knowledge clones (bounded, silent) and starts two throttled
 // background jobs: plugin update and the auto-register scan. It never changes project code and never blocks a session.
+// It also checks the git, gh and claude.ai accounts against the registry; a mismatch is printed at the very top
+// (and the identity guard then blocks pushes and GitHub writes for this project until a re-check passes).
 
 import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { findProject, loadRegistry } from "./lib/registry.mjs";
 import { buildDigest, CLONES, detached, due, syncClones } from "./lib/knowledge.mjs";
+import { checkAccounts, formatCheck } from "./lib/accounts.mjs";
 
 const root = process.env.CLAUDE_PLUGIN_ROOT || path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 
@@ -20,7 +23,9 @@ try { cwd = JSON.parse(raw).cwd || cwd; } catch { /* keep default */ }
 let out = "";
 try { out += readFileSync(path.join(root, "core", "CLAUDE.md"), "utf8"); } catch { /* missing rules never block */ }
 
-const project = findProject(loadRegistry({ committed: true }), cwd);
+const registry = loadRegistry({ committed: true });
+const project = findProject(registry, cwd);
+let top = "";
 if (project) {
   const notes = project.owner === "asen" ? "asen/" : project.owner === "personal" ? `personal/${project.id}/` : `clients/${project.owner.slice(7)}/`;
   out += `
@@ -34,6 +39,13 @@ if (project) {
 - Private notes and lessons for this project go to \`asen-engineering-private/${notes}\` only.
 ${project.owner === "asen" ? "" : "- This is not an ASEN project: never use, mention, or copy information from any other project or client, and never put anything from it in the public repo.\n"}`;
   if (project.automation !== "off") {
+    try {
+      const check = await checkAccounts(cwd, project, registry, { radarDir: CLONES.radar });
+      if (check.ok) out += `
+${formatCheck(check)}`;
+      else top = `${formatCheck(check)}
+`;
+    } catch { /* the guard still checks git and gh live before every push */ }
     try {
       if (due("knowledge-sync", 30)) await syncClones();
       if (due("plugin-update", 360)) detached("claude plugin marketplace update asen && claude plugin update asen-engineering@asen");
@@ -51,4 +63,4 @@ ${buildDigest(cwd, project, { scriptPath: path.join(root, "scripts", "asen-knowl
 GitHub writes are blocked here. Don't read or change git/gh settings. If Aakash wants this project managed, run \`/add-project\`.
 `;
 }
-process.stdout.write(out);
+process.stdout.write(top + out);

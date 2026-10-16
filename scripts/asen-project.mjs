@@ -8,6 +8,7 @@
 //   remove <id>           Remove one project from the working registry. Does not commit.
 //   sync                  Regenerate the git identity files from the COMMITTED registry.
 //   whoami [dir]          Prove which identity git and gh will use in a folder (never prints tokens).
+//   check-accounts [dir]  Check git, gh and claude.ai accounts against the registry; saves the result the guard uses.
 //   blocklist             Print words that must never appear in the public repo (client/personal names).
 //
 // Only `add`, `remove`, and `sync` write anything, and only to the registry file or to ~/.gitconfig-asen-* files.
@@ -19,6 +20,8 @@ import path from "node:path";
 import {
   findProject, loadRegistry, noreplyEmail, normPath, registryFile, validateRegistry,
 } from "../hooks/lib/registry.mjs";
+import { checkAccounts, formatCheck } from "../hooks/lib/accounts.mjs";
+import { CLONES } from "../hooks/lib/knowledge.mjs";
 
 const HOME = os.homedir().replace(/\\/g, "/");
 const PROFILES = `${HOME}/.gitconfig-asen-profiles`;
@@ -189,6 +192,15 @@ async function main() {
       process.stdout.write(`${JSON.stringify(out, null, 2)}\n`);
       break;
     }
+    case "check-accounts": {
+      const dir = path.resolve(args[0] || process.cwd());
+      const { reg, project } = committedProject(dir);
+      if (!project) fail(`${dir} is not a registered project.`);
+      const r = await checkAccounts(dir, project, reg, { radarDir: CLONES.radar });
+      process.stdout.write(formatCheck(r));
+      if (!r.ok) process.exitCode = 1;
+      break;
+    }
     case "blocklist": {
       const reg = readWorking();
       const words = new Set();
@@ -206,7 +218,7 @@ async function main() {
       break;
     }
     default:
-      fail("Commands: lookup, account, validate, add, remove, sync, whoami, blocklist");
+      fail("Commands: lookup, account, validate, add, remove, sync, whoami, check-accounts, blocklist");
   }
 }
 

@@ -2,6 +2,11 @@
 
 All notable changes to ASEN Engineering. Each merged PR is also tagged (`merge-<PR number>`), so any version can be restored.
 
+## 0.6.0 (2026-10-16)
+
+- **Account check at every session start** (registered projects): the git push login, the gh token and the commit email are compared with the registry; for ASEN projects also the claude.ai GitHub connection (confirmed daily by the asen-radar watchdog in `raw/claude-connection.json`). A mismatch is printed at the very top of the session, and the **identity guard blocks pushes and GitHub writes** for that project until `scripts/asen-project.mjs check-accounts .` passes again.
+- Identity guard: Git Bash paths such as `/c/Users/...` now resolve to the right Windows folder.
+
 ## 0.5.0 (2026-10-02)
 
 - **Project Brain**: one shared, always-updated memory of every project. `scripts/asen-brain.mjs collect` runs hourly with the auto-register task (facts only, no Claude): new commits, changed files, dependency changes, the project's own README/CLAUDE.md/progress/TODO notes, new TODOs; credentials are redacted. Facts, summaries, plans and an overview live in the private repo, inside each owner's folder.
