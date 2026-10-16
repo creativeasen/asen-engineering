@@ -17,10 +17,10 @@ Source for every row: the official models overview. Re-verify monthly and whenev
 | --- | --- | --- | --- | --- |
 | Claude Code day-to-day building | Opus 5.5 | Anthropic's recommended starting point for most workloads | https://platform.claude.com/docs/en/models/overview | 2026-09-24 |
 | security-reviewer, architect-reviewer, knowledge-verifier agents | Opus 5.5 | Deep reasoning; correctness matters more than speed | https://platform.claude.com/docs/en/models/overview | 2026-09-24 |
-| qa-tester agent | Sonnet 5 | Many quick checks; good speed/intelligence balance | https://platform.claude.com/docs/en/models/overview | 2026-09-24 |
-| Cloud routines on the Pro plan | Sonnet 5 (Opus 5.5 for PR Verifier) | Keeps usage low; verification needs the stronger model | https://platform.claude.com/docs/en/models/overview | 2026-09-24 |
-| In-product AI features (WhatsApp replies, summaries) | Sonnet 5 | Balanced cost and quality at volume | https://platform.claude.com/docs/en/models/overview | 2026-09-24 |
-| High-volume classification/routing in products | Sonnet 5 for new work; Haiku 4.5 only with a migration plan | Haiku 4.5 retirement can start 2026-10-15 | https://platform.claude.com/docs/en/models/overview | 2026-09-24 |
+| qa-tester agent | Sonnet 5.5 | Many quick checks; good speed/intelligence balance | https://platform.claude.com/docs/en/models/overview | 2026-10-16 |
+| Cloud routines on the Pro plan | Sonnet 5.5 (Opus 5.5 for PR Verifier) | Keeps usage low; verification needs the stronger model | https://platform.claude.com/docs/en/models/overview | 2026-10-16 |
+| In-product AI features (WhatsApp replies, summaries) | Sonnet 5.5 | Balanced cost and quality at volume | https://platform.claude.com/docs/en/models/overview | 2026-10-16 |
+| High-volume classification/routing in products | Sonnet 5.5 for new work; Haiku 5.5 for latency-sensitive routing; migrate any Haiku 4.5 use | Haiku 4.5 is legacy (retirement not before 2026-10-15) | https://platform.claude.com/docs/en/models/overview | 2026-10-16 |
 
 ## Rules for model use in ASEN products
 
