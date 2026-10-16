@@ -8,7 +8,7 @@ Every row was checked on an official source (see `sources.md`). Each row needs a
 
 | Item | Use | Latest seen | Notes | Source | Verified |
 | --- | --- | --- | --- | --- | --- |
-| Node.js | 24.x LTS ("Krypton") | 24.21.0 LTS; 26.10.0 Current | 24 = Active LTS until 2026-10-20, then Maintenance until 2028-04-30. Node 26 becomes LTS on 2026-10-28. Node 20 reached end-of-life 2026-04-30: do not use. | https://github.com/nodejs/Release/blob/main/schedule.json | 2026-09-24 |
+| Node.js | 24.x LTS ("Krypton") | 24.21.0 LTS; 26.10.0 Current | 24 = Active LTS until 2026-10-20, then Maintenance until 2028-04-30. Node 26 becomes LTS on 2026-10-28. Node 20 reached end-of-life 2026-04-30: do not use. | https://github.com/nodejs/Release/blob/main/schedule.json | 2026-10-16 |
 | Node.js release list | — | v24.21.0 (2026-09-07), v22.23.3 (2026-09-23) | Official download index | https://nodejs.org/dist/index.json | 2026-09-24 |
 | Python | 3.14.x | 3.14.7 (2026-08-05) | 3.15 is at release candidate (3.15.0rc2, 2026-09-01): don't use in production yet. | https://www.python.org/downloads/ | 2026-09-24 |
 | TypeScript | 7.0.x | 7.0.2 | Major version: check tooling support before adopting in an existing project. | https://registry.npmjs.org/typescript/latest | 2026-09-24 |
@@ -52,7 +52,7 @@ Every row was checked on an official source (see `sources.md`). Each row needs a
 | n8n | 2.x | 2.41.5 (2026-10-01, latest stable; 2.42.x is pre-release) | Self-hosted: keep updated; n8n has had critical advisories. | https://github.com/n8n-io/n8n/releases | 2026-10-01 |
 | Meta Graph API (WhatsApp Cloud API) | v26.0 | v26.0 (introduced 2026-07-29) | v25.0 available until 2028-07-29. v20.0 expires 2026-09-24. Pin the version in the URL. | https://developers.facebook.com/docs/graph-api/changelog/ | 2026-09-24 |
 | Razorpay Node SDK | `razorpay` 2.x | 2.9.8 | Webhooks: HMAC-SHA256 of the raw body in `X-Razorpay-Signature`; dedupe on `x-razorpay-event-id`. | https://razorpay.com/docs/webhooks/validate-test/ | 2026-09-24 |
-| Shopify Admin API | 2026-07 (stable) | 2026-10 releases 2026-10-01 | Each version is supported for at least 12 months. 2025-10 stops being accessible 2026-10-16. | https://shopify.dev/docs/api/usage/versioning | 2026-09-24 |
+| Shopify Admin API | 2026-10 (latest stable) | 2027-01 is a release candidate (releases 2027-01-01) | Each version is supported for at least 12 months. 2026-10 is accessible until 2027-10-16; 2026-07 until 2027-07-16; 2026-01 until 2027-01-16. 2025-10 stopped being accessible on 2026-10-16. | https://shopify.dev/docs/api/usage/versioning | 2026-10-16 |
 | Shopify API library | `@shopify/shopify-api` 15.x | 15.0.0 | | https://registry.npmjs.org/@shopify%2Fshopify-api/latest | 2026-09-24 |
 | Shopify CLI | `@shopify/cli` 4.x | 4.8.2 | | https://registry.npmjs.org/@shopify%2Fcli/latest | 2026-09-24 |
 | Resend | `resend` 6.x | 6.28.1 | Transactional email. | https://registry.npmjs.org/resend/latest | 2026-09-24 |

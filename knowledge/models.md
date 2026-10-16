@@ -1,6 +1,6 @@
 # Which Claude model for which task
 
-Source for every row: the official models overview. Re-verify monthly and whenever Anthropic announces a model.
+Source for every row: the official models overview and model deprecations pages. Re-verify monthly and whenever Anthropic announces a model.
 
 ## Current models
 
@@ -8,8 +8,10 @@ Source for every row: the official models overview. Re-verify monthly and whenev
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | Claude Fable 5.1 | `claude-fable-5-1` | Hardest reasoning, long agentic work, when Opus at high effort still falls short | $10 / $50 | 1M | 2027-09-01 | https://platform.claude.com/docs/en/models/overview | 2026-09-24 |
 | Claude Opus 5.5 | `claude-opus-5-5` | Default for most work: long-running agentic coding, reviews, architecture | $4 / $20 | 1M | 2027-09-22 | https://platform.claude.com/docs/en/models/overview | 2026-09-24 |
-| Claude Sonnet 5 | `claude-sonnet-5` | Fast, strong everyday work: product features, chat, classification with reasoning | $2 / $10 | 1M | 2027-06-30 | https://platform.claude.com/docs/en/models/overview | 2026-09-24 |
-| Claude Haiku 4.5 | `claude-haiku-4-5-20251001` | Fastest and cheapest: routing, extraction, short replies | $1 / $5 | 200K | **2026-10-15** (soon) | https://platform.claude.com/docs/en/models/overview | 2026-09-24 |
+| Claude Sonnet 5.5 | `claude-sonnet-5-5` | Fast, strong everyday work: product features, chat, classification with reasoning | $2 / $10 | 1M | 2027-09-28 | https://platform.claude.com/docs/en/models/overview | 2026-10-16 |
+| Claude Sonnet 5 | `claude-sonnet-5` | Legacy (prefer Sonnet 5.5). Fast, strong everyday work: product features, chat, classification with reasoning | $2 / $10 | 1M | 2027-06-30 | https://platform.claude.com/docs/en/models/overview | 2026-10-16 |
+| Claude Haiku 5.5 | `claude-haiku-5-5` | Fastest: high-volume, latency-sensitive tasks such as classification, extraction, routing | from $0.10 / $0.50 | 1M | 2027-10-07 | https://platform.claude.com/docs/en/models/overview | 2026-10-16 |
+| Claude Haiku 4.5 | `claude-haiku-4-5-20251001` | Legacy (prefer Haiku 5.5). Routing, extraction, short replies | $1 / $5 | 200K | 2026-10-15 (status Active, no retirement notice yet) | https://platform.claude.com/docs/en/about-claude/model-deprecations | 2026-10-16 |
 
 ## ASEN recommendations
 
