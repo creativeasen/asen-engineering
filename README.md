@@ -40,6 +40,7 @@ How it works:
 - **Commits and pushes**: for each registered project, git gets a rule for that folder only (generated into `~/.gitconfig-asen-profiles`). It pushes with that project's account token, which is fetched from the Windows keyring at the moment of pushing and never written to a file. ASEN projects commit with the account's GitHub noreply email; client and personal projects keep their current commit identity unless you choose otherwise.
 - **gh commands**: `pgh <command>` runs gh as the current project's account for that one command. (Long form: `GH_TOKEN=$(gh auth token --user <account>) gh <command>`.) Your global default account never changes.
 - **Identity guard**: before every `git push` or gh write, a read-only check looks the folder up in the registry and blocks the command unless it uses exactly that project's account, targets one of its repos, and fits its automation level. Unregistered folders are blocked. It reads the registry as committed, so an unsaved edit can't widen access.
+- **Account check**: every session in a registered project starts by comparing the git, gh and (for ASEN projects) claude.ai GitHub accounts with the registry. A mismatch is shown at the top of the session and the identity guard blocks pushes and GitHub writes until `node scripts/asen-project.mjs check-accounts .` passes.
 - **Client and personal projects** enable the plugin in `.claude/settings.local.json`, which is never committed. Nothing ASEN-related lands in their repos.
 
 ## Add any project with /add-project

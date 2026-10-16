@@ -2,11 +2,14 @@
 // ASEN identity guard (PreToolUse, Bash|PowerShell). Read-only: it never changes files or settings.
 // Before `git push` or a GitHub write command, it looks up the project for the target folder in the private
 // registry (committed copy) and blocks unless the push/write uses exactly that project's GitHub account and
-// targets one of that project's repos. Exit 0 = allow, exit 2 = block (reason on stderr).
+// targets one of that project's repos. It also blocks while the project's latest account check (SessionStart, or
+// `asen-project.mjs check-accounts`) failed, e.g. claude.ai connected to the wrong GitHub account.
+// Exit 0 = allow, exit 2 = block (reason on stderr).
 
 import { execFileSync } from "node:child_process";
 import path from "node:path";
 import { findProject, loadRegistry, noreplyEmail, ownerRepoFromUrl, repoAllowed } from "./lib/registry.mjs";
+import { lastCheck } from "./lib/accounts.mjs";
 
 const REMOTE = process.env.CLAUDE_CODE_REMOTE === "true";
 const CLOUD_OWNER = "creativeasen"; // cloud routines only ever run on ASEN repos
@@ -49,11 +52,15 @@ async function tokenLogin(token) {
 }
 
 // Directory the command targets: `git -C <dir>`, else the last `cd <dir>` before it, else the hook cwd.
+// On Windows, Git Bash writes C:\x as /c/x; resolve it to the same folder instead of "<cwd drive>:/c/x".
+function winPath(p) {
+  return process.platform === "win32" ? p.replace(/^\/([a-zA-Z])(\/|$)/, "$1:/") : p;
+}
 function targetDir(command, matchIndex, explicitC, cwd) {
-  if (explicitC) return path.resolve(cwd, unquote(explicitC));
+  if (explicitC) return path.resolve(cwd, winPath(unquote(explicitC)));
   const before = command.slice(0, matchIndex);
   const cds = [...before.matchAll(/(?:^|[;&|\n]\s*)(?:cd|Set-Location|pushd)\s+("[^"]+"|'[^']+'|[^\s;&|]+)/g)];
-  if (cds.length) return path.resolve(cwd, unquote(cds[cds.length - 1][1]));
+  if (cds.length) return path.resolve(cwd, winPath(unquote(cds[cds.length - 1][1])));
   return cwd;
 }
 
@@ -64,6 +71,10 @@ function projectFor(dir) {
   const project = findProject(registry, dir);
   if (!project) block(`"${dir.replace(/\\/g, "/")}" is not a registered project. Run /add-project first (with Aakash's approval).`);
   if (project.automation === "off") block(`project "${project.id}" has automation "off".`);
+  const check = lastCheck(project.id);
+  if (check?.ok === false) {
+    block(`the account check for project "${project.id}" failed: ${check.problems.join(" ")} Fix it, then re-check: node <asen-engineering>/scripts/asen-project.mjs check-accounts .`);
+  }
   return project;
 }
 
