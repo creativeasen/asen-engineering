@@ -17,9 +17,9 @@ Every row was checked on an official source (see `sources.md`). Each row needs a
 
 | Item | Use | Latest seen | Notes | Source | Verified |
 | --- | --- | --- | --- | --- | --- |
-| React | 19.x | 19.3.1 |  | https://registry.npmjs.org/react/latest | 2026-10-25 |
-| Vite | 8.x | 8.3.5 |  | https://registry.npmjs.org/vite/latest | 2026-10-25 |
-| Tailwind CSS | 4.x with `@tailwindcss/vite` | 4.3.3 |  | https://registry.npmjs.org/tailwindcss/latest | 2026-10-25 |
+| React | 19.x | 19.3.1 | | https://registry.npmjs.org/react/latest | 2026-10-25 |
+| Vite | 8.x | 8.3.5 | | https://registry.npmjs.org/vite/latest | 2026-10-25 |
+| Tailwind CSS | 4.x with `@tailwindcss/vite` | 4.3.3 | | https://registry.npmjs.org/tailwindcss/latest | 2026-10-25 |
 | Expo (mobile) | SDK 57 | 58.0.19 | SDK 58 is the latest; new projects stay on SDK 57 until a reviewer approves the major upgrade (needs-aakash). Secrets on device: `expo-secure-store`. | https://registry.npmjs.org/expo/latest | 2026-10-25 |
 
 ## Python services
@@ -35,7 +35,7 @@ Every row was checked on an official source (see `sources.md`). Each row needs a
 
 | Item | Use | Latest seen | Notes | Source | Verified |
 | --- | --- | --- | --- | --- | --- |
-| Supabase JS | `@supabase/supabase-js` 2.x | 2.118.0 |  | https://registry.npmjs.org/@supabase%2Fsupabase-js/latest | 2026-10-25 |
+| Supabase JS | `@supabase/supabase-js` 2.x | 2.118.0 | | https://registry.npmjs.org/@supabase%2Fsupabase-js/latest | 2026-10-25 |
 | Supabase CLI | `supabase` 2.x | 2.122.0 | Migrations live in `supabase/migrations`. | https://registry.npmjs.org/supabase/latest | 2026-10-25 |
 | Supabase API keys | Publishable (`sb_publishable_...`) in clients, Secret (`sb_secret_...`) only on servers | — | Legacy `anon` / `service_role` JWT keys are being deprecated by end of 2026. New projects: use new keys only. | https://supabase.com/docs/guides/api/api-keys | 2026-09-24 |
 | Valkey | 9.x | 9.1.2 (2026-09-01) | Open-source Redis-compatible server. Redis 8.10.2 also current. | https://github.com/valkey-io/valkey/releases | 2026-09-24 |
@@ -53,11 +53,11 @@ Every row was checked on an official source (see `sources.md`). Each row needs a
 | Meta Graph API (WhatsApp Cloud API) | v26.0 | v26.0 (introduced 2026-07-29) | v25.0 available until 2028-07-29. v20.0 expires 2026-09-24. Pin the version in the URL. | https://developers.facebook.com/docs/graph-api/changelog/ | 2026-09-24 |
 | Razorpay Node SDK | `razorpay` 2.x | 2.9.8 | Webhooks: HMAC-SHA256 of the raw body in `X-Razorpay-Signature`; dedupe on `x-razorpay-event-id`. | https://razorpay.com/docs/webhooks/validate-test/ | 2026-09-24 |
 | Shopify Admin API | 2026-10 (latest stable) | 2027-01 is a release candidate (releases 2027-01-01) | Each version is supported for at least 12 months. 2026-10 is accessible until 2027-10-16; 2026-07 until 2027-07-16; 2026-01 until 2027-01-16. 2025-10 stopped being accessible on 2026-10-16. | https://shopify.dev/docs/api/usage/versioning | 2026-10-16 |
-| Shopify API library | `@shopify/shopify-api` 15.x | 15.0.1 |  | https://registry.npmjs.org/@shopify%2Fshopify-api/latest | 2026-10-25 |
-| Shopify CLI | `@shopify/cli` 4.x | 4.9.4 |  | https://registry.npmjs.org/@shopify%2Fcli/latest | 2026-10-25 |
+| Shopify API library | `@shopify/shopify-api` 15.x | 15.0.1 | | https://registry.npmjs.org/@shopify%2Fshopify-api/latest | 2026-10-25 |
+| Shopify CLI | `@shopify/cli` 4.x | 4.9.4 | | https://registry.npmjs.org/@shopify%2Fcli/latest | 2026-10-25 |
 | Resend | `resend` 6.x | 6.34.1 | Transactional email. | https://registry.npmjs.org/resend/latest | 2026-10-25 |
 | Anthropic SDK (JS) | `@anthropic-ai/sdk` | 0.131.0 | Model choice: see `models.md`. Sonnet 4.5 is deprecated in the client ([v0.131.0 release notes](https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.131.0)). | https://registry.npmjs.org/@anthropic-ai%2Fsdk/latest | 2026-10-01 |
-| Anthropic SDK (Python) | `anthropic` | 2.3.0 |  | https://pypi.org/project/anthropic/ | 2026-10-25 |
+| Anthropic SDK (Python) | `anthropic` | 2.3.0 | | https://pypi.org/project/anthropic/ | 2026-10-25 |
 
 ## Hosting and edge
 
@@ -80,11 +80,11 @@ Every row was checked on an official source (see `sources.md`). Each row needs a
 | Item | Use | Latest seen | Notes | Source | Verified |
 | --- | --- | --- | --- | --- | --- |
 | Biome | 2.x (default formatter + linter) | 2.6.3 | Use Biome for new projects; ESLint where a plugin is needed. | https://registry.npmjs.org/@biomejs%2Fbiome/latest | 2026-10-25 |
-| ESLint | 10.x with `typescript-eslint` 8.x | 10.13.0 / 8.72.0 |  | https://registry.npmjs.org/eslint/latest | 2026-10-25 |
+| ESLint | 10.x with `typescript-eslint` 8.x | 10.13.0 / 8.72.0 | | https://registry.npmjs.org/eslint/latest | 2026-10-25 |
 | Vitest | 5.x | 5.0.5 | Major release: check config changes. | https://registry.npmjs.org/vitest/latest | 2026-10-25 |
 | Playwright | `@playwright/test` 1.x | 1.64.1 | E2E + mobile viewport tests. | https://registry.npmjs.org/@playwright%2Ftest/latest | 2026-10-25 |
 | Ruff (Python) | 0.16.x | 0.17.2 | Lint + format for Python. 0.17.x is out; 0.16.x stays the baseline until reviewed. | https://pypi.org/project/ruff/ | 2026-10-25 |
-| pytest (Python) | 9.x | 9.1.1 |  | https://pypi.org/project/pytest/ | 2026-10-25 |
+| pytest (Python) | 9.x | 9.1.1 | | https://pypi.org/project/pytest/ | 2026-10-25 |
 | gitleaks | 8.x | 8.30.1 | Secret scanning locally and in CI. | https://github.com/gitleaks/gitleaks/releases | 2026-09-24 |
 
 ## CI actions (pin by commit SHA)
