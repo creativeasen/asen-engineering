@@ -8,9 +8,9 @@ Every row was checked on an official source (see `sources.md`). Each row needs a
 
 | Item | Use | Latest seen | Notes | Source | Verified |
 | --- | --- | --- | --- | --- | --- |
-| Node.js | 24.x LTS ("Krypton") | 24.22.1 LTS; 26.12.1 Current | 24 moved to Maintenance on 2026-10-20 (until 2028-04-30). Node 26 becomes LTS on 2026-10-28. Node 20 reached end-of-life 2026-04-30: do not use. | https://github.com/nodejs/Release/blob/main/schedule.json | 2026-10-16 |
-| Node.js release list | — | v24.22.1 (2026-10-20), v22.23.4 (2026-10-20), v26.12.1 (2026-10-21) | Official download index | https://nodejs.org/dist/index.json | 2026-10-25 |
-| Python | 3.14.x | 3.14.7 (2026-08-05) | 3.15 is at release candidate (3.15.0rc2, 2026-09-01): don't use in production yet. | https://www.python.org/downloads/ | 2026-09-24 |
+| Node.js | 24.x LTS ("Krypton") | 24.22.1 LTS (Maintenance); 26.13.0 LTS "Lithium" | 24 moved to Maintenance on 2026-10-20 (until 2028-04-30). Node 26 became LTS on 2026-10-28 (Maintenance 2027-10-20, end 2029-04-30). New projects stay on 24.x until a reviewer approves moving the baseline to 26 (needs-aakash). Node 20 reached end-of-life 2026-04-30: do not use. | https://github.com/nodejs/Release/blob/main/schedule.json | 2026-11-01 |
+| Node.js release list | — | v26.13.0 (2026-10-28), v24.22.1 (2026-10-20), v22.23.4 (2026-10-20) | Official download index | https://nodejs.org/dist/index.json | 2026-11-01 |
+| Python | 3.14.x | 3.14.10 (2026-10-25); 3.15.2 (2026-10-25) | 3.15.0 was released 2026-10-09. New projects stay on 3.14.x until a reviewer approves the 3.15 baseline (needs-aakash). | https://www.python.org/downloads/ | 2026-11-01 |
 | TypeScript | 7.0.x | 7.0.2 | Major version: check tooling support before adopting in an existing project. | https://registry.npmjs.org/typescript/latest | 2026-10-25 |
 
 ## Frontend
@@ -56,7 +56,7 @@ Every row was checked on an official source (see `sources.md`). Each row needs a
 | Shopify API library | `@shopify/shopify-api` 15.x | 15.0.1 | | https://registry.npmjs.org/@shopify%2Fshopify-api/latest | 2026-10-25 |
 | Shopify CLI | `@shopify/cli` 4.x | 4.9.4 | | https://registry.npmjs.org/@shopify%2Fcli/latest | 2026-10-25 |
 | Resend | `resend` 6.x | 6.34.1 | Transactional email. | https://registry.npmjs.org/resend/latest | 2026-10-25 |
-| Anthropic SDK (JS) | `@anthropic-ai/sdk` | 0.131.0 | Model choice: see `models.md`. Sonnet 4.5 is deprecated in the client ([v0.131.0 release notes](https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.131.0)). | https://registry.npmjs.org/@anthropic-ai%2Fsdk/latest | 2026-10-01 |
+| Anthropic SDK (JS) | `@anthropic-ai/sdk` | 1.3.0 (1.0.0 published 2026-10-21) | Model choice: see `models.md`. 1.x is a new major version (npm registry): read its migration notes before upgrading existing projects (needs-aakash). Sonnet 4.5 is deprecated in the client ([v0.131.0 release notes](https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.131.0)). | https://registry.npmjs.org/@anthropic-ai%2Fsdk/latest | 2026-11-01 |
 | Anthropic SDK (Python) | `anthropic` | 2.3.0 | | https://pypi.org/project/anthropic/ | 2026-10-25 |
 
 ## Hosting and edge
