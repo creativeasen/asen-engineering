@@ -37,7 +37,7 @@ Every row was checked on an official source (see `sources.md`). Each row needs a
 | --- | --- | --- | --- | --- | --- |
 | Supabase JS | `@supabase/supabase-js` 2.x | 2.118.0 | | https://registry.npmjs.org/@supabase%2Fsupabase-js/latest | 2026-10-25 |
 | Supabase CLI | `supabase` 2.x | 2.122.0 | Migrations live in `supabase/migrations`. | https://registry.npmjs.org/supabase/latest | 2026-10-25 |
-| Supabase API keys | Publishable (`sb_publishable_...`) in clients, Secret (`sb_secret_...`) only on servers | — | Legacy `anon` / `service_role` JWT keys are being deprecated by end of 2026. New projects: use new keys only. | https://supabase.com/docs/guides/api/api-keys | 2026-09-24 |
+| Supabase API keys | Publishable (`sb_publishable_...`) in clients, Secret (`sb_secret_...`) only on servers | — | Legacy `anon` / `service_role` JWT keys are being deprecated by end of 2026. New projects: use new keys only. | https://supabase.com/docs/guides/api/api-keys | 2026-11-08 |
 | Valkey | 9.x | 9.1.2 (2026-09-01) | Open-source Redis-compatible server. Redis 8.10.2 also current. | https://github.com/valkey-io/valkey/releases | 2026-09-24 |
 | Redis | 8.x | 8.10.2 (2026-09-17) | | https://github.com/redis/redis/releases | 2026-09-24 |
 | BullMQ | 6.x | 6.4.2 | Queues for all bulk work. | https://registry.npmjs.org/bullmq/latest | 2026-10-25 |
@@ -50,7 +50,7 @@ Every row was checked on an official source (see `sources.md`). Each row needs a
 | Item | Use | Latest seen | Notes | Source | Verified |
 | --- | --- | --- | --- | --- | --- |
 | n8n | 2.x | 2.44.6 (2026-10-22, latest stable; 2.45.x is pre-release) | Self-hosted: keep updated; n8n has had critical advisories. | https://github.com/n8n-io/n8n/releases | 2026-10-23 |
-| Meta Graph API (WhatsApp Cloud API) | v26.0 | v26.0 (introduced 2026-07-29) | v25.0 available until 2028-07-29. v20.0 expires 2026-09-24. Pin the version in the URL. | https://developers.facebook.com/docs/graph-api/changelog/ | 2026-09-24 |
+| Meta Graph API (WhatsApp Cloud API) | v26.0 | v27.0 (changelog lists it as latest; release date not shown); v26.0 introduced 2026-07-29 | v26.0 baseline stays until a reviewer approves v27 (needs-aakash). v25.0 available until 2028-07-29; v21.0 until 2027-01-21; v20.0 expired 2026-09-24. Pin the version in the URL. | https://developers.facebook.com/docs/graph-api/changelog/ | 2026-11-08 |
 | Razorpay Node SDK | `razorpay` 2.x | 2.9.8 | Webhooks: HMAC-SHA256 of the raw body in `X-Razorpay-Signature`; dedupe on `x-razorpay-event-id`. | https://razorpay.com/docs/webhooks/validate-test/ | 2026-09-24 |
 | Shopify Admin API | 2026-10 (latest stable) | 2027-01 is a release candidate (releases 2027-01-01) | Each version is supported for at least 12 months. 2026-10 is accessible until 2027-10-16; 2026-07 until 2027-07-16; 2026-01 until 2027-01-16. 2025-10 stopped being accessible on 2026-10-16. | https://shopify.dev/docs/api/usage/versioning | 2026-10-16 |
 | Shopify API library | `@shopify/shopify-api` 15.x | 15.0.1 | | https://registry.npmjs.org/@shopify%2Fshopify-api/latest | 2026-10-25 |
@@ -63,7 +63,7 @@ Every row was checked on an official source (see `sources.md`). Each row needs a
 
 | Item | Use | Latest seen | Notes | Source | Verified |
 | --- | --- | --- | --- | --- | --- |
-| Vercel | Node.js 24.x runtime | Vercel CLI 59.26.0 | 24.x is Vercel's default. Node 20 deprecated on Vercel from 2026-10-01. | https://vercel.com/docs/functions/runtimes/node-js/node-js-versions | 2026-09-24 |
+| Vercel | Node.js 24.x runtime | Vercel CLI 59.26.0 | Vercel now offers 26.x (its default), 24.x and 22.x; Node 20 is no longer listed (deprecated 2026-10-01). Pin `"engines": {"node": "24.x"}` so the default moving to 26 does not change the baseline (Node 26 move is needs-aakash). | https://vercel.com/docs/functions/runtimes/node-js/node-js-versions | 2026-11-08 |
 | Railway CLI | `@railway/cli` | 5.71.0 | For workers, queues, long-running services. | https://registry.npmjs.org/@railway%2Fcli/latest | 2026-10-25 |
 | Cloudflare Wrangler | `wrangler` 4.x | 4.152.0 | DNS, WAF, Workers. | https://registry.npmjs.org/wrangler/latest | 2026-10-25 |
 
