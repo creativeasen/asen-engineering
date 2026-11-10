@@ -56,7 +56,7 @@ Every row was checked on an official source (see `sources.md`). Each row needs a
 | Shopify API library | `@shopify/shopify-api` 15.x | 15.0.1 | | https://registry.npmjs.org/@shopify%2Fshopify-api/latest | 2026-10-25 |
 | Shopify CLI | `@shopify/cli` 4.x | 4.9.4 | | https://registry.npmjs.org/@shopify%2Fcli/latest | 2026-10-25 |
 | Resend | `resend` 6.x | 6.34.1 | Transactional email. | https://registry.npmjs.org/resend/latest | 2026-10-25 |
-| Anthropic SDK (JS) | `@anthropic-ai/sdk` | 1.3.0 (1.0.0 published 2026-10-21) | Model choice: see `models.md`. 1.x is a new major version (npm registry): read its migration notes before upgrading existing projects (needs-aakash). Sonnet 4.5 is deprecated in the client ([v0.131.0 release notes](https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.131.0)). | https://registry.npmjs.org/@anthropic-ai%2Fsdk/latest | 2026-11-01 |
+| Anthropic SDK (JS) | `@anthropic-ai/sdk` | 1.7.0 (1.0.0 published 2026-10-21) | Model choice: see `models.md`. 1.x is a new major version (npm registry): read its migration notes before upgrading existing projects (needs-aakash). Sonnet 4.5 is deprecated in the client ([v0.131.0 release notes](https://github.com/anthropics/anthropic-sdk-typescript/releases/tag/sdk-v0.131.0)). | https://registry.npmjs.org/@anthropic-ai%2Fsdk/latest | 2026-11-10 |
 | Anthropic SDK (Python) | `anthropic` | 2.3.0 | | https://pypi.org/project/anthropic/ | 2026-10-25 |
 
 ## Hosting and edge
