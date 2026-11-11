@@ -17,7 +17,7 @@ Every row was checked on an official source (see `sources.md`). Each row needs a
 
 | Item | Use | Latest seen | Notes | Source | Verified |
 | --- | --- | --- | --- | --- | --- |
-| React | 19.x | 19.3.1 | | https://registry.npmjs.org/react/latest | 2026-10-25 |
+| React | 19.x | 19.3.1 | Critical RSC RCE (CVE-2026-126187): react-server-dom-webpack/turbopack/parcel fixed in 19.0.9, 19.1.10, 19.2.9, 19.3.1. Only apps using React Server Components are affected. | https://github.com/advisories/GHSA-xqc2-xf4c-x3h3 | 2026-11-11 |
 | Vite | 8.x | 8.3.5 | | https://registry.npmjs.org/vite/latest | 2026-10-25 |
 | Tailwind CSS | 4.x with `@tailwindcss/vite` | 4.3.3 | | https://registry.npmjs.org/tailwindcss/latest | 2026-10-25 |
 | Expo (mobile) | SDK 57 | 58.0.19 | SDK 58 is the latest; new projects stay on SDK 57 until a reviewer approves the major upgrade (needs-aakash). Secrets on device: `expo-secure-store`. | https://registry.npmjs.org/expo/latest | 2026-10-25 |
