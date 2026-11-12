@@ -23,7 +23,7 @@ Files (private repo `asen-engineering-private`):
 
 ## Steps
 
-1. **Anything to do?** List public repos: `gh api "users/<account>/repos?per_page=100&sort=pushed"` for `creativeasen`, `asenbot` and the client GitHub account in the private registry (names only), saved together as one JSON array. Then run `node asen-engineering/scripts/asen-hub.mjs work --private asen-engineering-private --radar asen-radar --github <that file>`. If `total` is 0: run `sync` (step 7) only if `index.json` lacks hub rows, then stop. Write nothing else.
+1. **Anything to do?** Run `node asen-engineering/scripts/asen-hub.mjs work --private asen-engineering-private --radar asen-radar --github asen-radar/raw/github-repos.json` (that list of public repos is refreshed daily by the radar watchdog; cloud sessions can't list accounts themselves). If `total` is 0: run `sync` (step 7) only if `index.json` lacks hub rows, then stop. Write nothing else.
 2. **Inbox (email and PC):** for each item, work out what Aakash means:
    - **New project** ("new project …", "starting X for a client", "I got the Y work", a new PC folder): add a card. Pick a short slug `id`, `owner_type` (asen / personal / client), `kind`, `status` (`idea` until work starts, else `active`), `goal` in his words, `source` (`email`, `pc`, `github`), `last_activity` = the item's date, `needs_plan: true`, `plan: null`.
    - **Update** ("pause X", "X is done", "continue X", "X: now we also need …", "remove X"): change that card's `status`, `next`, `goal` or `last_activity` (today). "remove" sets `status: done` and `notes: removed by Aakash`; never delete a card.

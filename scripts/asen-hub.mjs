@@ -219,7 +219,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) 
     else if (cmd === "check") { const e = validate(loadHub(priv)); if (e.length) { console.error(e.join("\n")); process.exitCode = 1; } else console.log(`hub ok: ${loadHub(priv).projects.length} projects`); }
     else if (cmd === "sync") console.log(JSON.stringify(sync(priv, { today: opt("--today") || undefined })));
     else if (cmd === "work") {
-      const github = opt("--github") ? [readJSON(opt("--github"), [])].flat(2) : [];
+      const g = opt("--github") ? readJSON(opt("--github"), []) : [];
+      const github = Array.isArray(g) ? g : g.repos || [];
       console.log(JSON.stringify(work(priv, opt("--radar") || ".", { github, today: opt("--today") || undefined }), null, 1));
     } else throw new Error(`unknown command ${cmd}`);
   } catch (e) { console.error(e.message); process.exitCode = 1; }
