@@ -1,8 +1,8 @@
-# Self-Upgrade (monthly, on the 2nd, after the Radar Daily brief)
+# Self-Upgrade (monthly, on the 2nd, 10:13 IST)
 
 Goal: keep the **system itself** at its best as AI tools change: its features, sources, routines and model, not just its knowledge. Weekly Upgrade keeps knowledge current; this routine upgrades the machine.
 
-It runs inside the Radar Daily routine on the 2nd of each month (IST), **after** that day's brief is pushed. It covers the previous month (`<M>` = last month as `YYYY-MM`).
+It runs as its own scheduled routine, "ASEN Self-Upgrade", on the 2nd of each month at 10:13 IST (retry 13:13 IST), after that day's brief. It covers the previous month (`<M>` = last month as `YYYY-MM`).
 
 ## Hard rules
 
@@ -25,7 +25,7 @@ It runs inside the Radar Daily routine on the 2nd of each month (IST), **after**
    - Last month's radar items marked Try/Adopt in agent tooling (asen-radar `briefs/`, `topics/`)
 
    For each candidate, write one line: what it would improve **in this system**, effort, risk.
-5. **Ideas backlog:** read asen-radar `feedback/ideas-backlog.md` (Aakash's email ideas plus earlier finds). Add the step 4 candidates as new `- [ ]` lines.
+5. **Ideas backlog:** read asen-radar `stack/ideas-backlog.md` (Aakash's email ideas plus earlier finds). Add the step 4 candidates as new `- [ ]` lines.
 6. **Pick and build (max 3 PRs):** choose the highest value-per-effort items from steps 3-5, root-cause fixes first. For each:
    - Make the smallest change that works, then run the repo checks (asen-radar: `node scripts/selftest.mjs`, `node scripts/mail/selftest.mjs`, YAML parse; asen-engineering: repo CI).
    - New feed: confirm it returns HTTP 200 with posts from the last 30 days before adding it to `config/sources.yml`. Replace or disable dead feeds the same way.
