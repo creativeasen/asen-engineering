@@ -172,12 +172,12 @@ function selftest() {
   const ok = (cond, msg) => { if (!cond) { bad++; console.error(`hub selftest FAILED: ${msg}`); } };
   try {
     writeJSON(path.join(dir, "brain/index.json"), { projects: [
-      { id: "wa-ai-agent", name: "wa-ai-agent", aliases: ["wa-ai-agent"], owner_type: "asen", status: "active", last_activity: "2026-10-20", summary: "fresh", goal: "unknown" },
+      { id: "bot-one", name: "bot-one", aliases: ["bot-one"], owner_type: "asen", status: "active", last_activity: "2026-10-20", summary: "fresh", goal: "unknown" },
       { id: "shopsite", name: "shopsite", aliases: ["shopsite"], owner_type: "client", status: "active", cloud_ok: false, summary: "missing" },
     ] });
     writeFileSync(path.join(dir, "brain/OVERVIEW.md"), "# Project Brain: all projects at a glance\n\n| a |\n");
     const hub = { updated: null, github_seen: ["me/old"], projects: [
-      { id: "wa-ai-agent", name: "WhatsApp AI agent", owner_type: "asen", kind: "automation", status: "active", goal: "custom chatbots per niche", next: "pilot on ASEN", last_activity: "2026-11-01" },
+      { id: "bot-one", name: "Chat bot one", owner_type: "asen", kind: "automation", status: "active", goal: "custom chatbots per niche", next: "pilot on ASEN", last_activity: "2026-11-01" },
       { id: "logo-x", name: "Logo X", owner_type: "client", kind: "design", status: "active", goal: "logo refresh", last_activity: "2026-10-01" },
       { id: "dash-y", name: "Dashboard Y", owner_type: "client", kind: "web", status: "idea", needs_plan: true, plan: null, last_activity: "2026-11-10" },
       { id: "reels", name: "Reels page", owner_type: "personal", kind: "content", status: "done", last_activity: "2026-09-01" },
@@ -190,7 +190,7 @@ function selftest() {
 
     const r = sync(dir, { today: "2026-11-12" });
     const idx = readJSON(path.join(dir, "brain/index.json"));
-    const wa = idx.projects.find((p) => p.id === "wa-ai-agent");
+    const wa = idx.projects.find((p) => p.id === "bot-one");
     ok(idx.projects.length === 5, `index should have 5 rows, has ${idx.projects.length}`);
     ok(wa.goal === "custom chatbots per niche" && wa.summary === "fresh" && !wa.hub && wa.last_activity === "2026-11-01", "collector row not overridden correctly");
     ok(idx.projects.find((p) => p.id === "logo-x")?.cloud_ok === false, "client hub row must be cloud_ok false");
@@ -199,9 +199,9 @@ function selftest() {
     ok(r.created === 2, `expected 2 brain stubs (asen + personal), got ${r.created}`);
     sync(dir, { today: "2026-11-12" });
     ok(readJSON(path.join(dir, "brain/index.json")).projects.length === 5, "sync is not idempotent");
-    writeJSON(path.join(dir, HUB), { ...hub, projects: hub.projects.filter((c) => c.id !== "wa-ai-agent") });
+    writeJSON(path.join(dir, HUB), { ...hub, projects: hub.projects.filter((c) => c.id !== "bot-one") });
     sync(dir, { today: "2026-11-12" });
-    const back = readJSON(path.join(dir, "brain/index.json")).projects.find((p) => p.id === "wa-ai-agent");
+    const back = readJSON(path.join(dir, "brain/index.json")).projects.find((p) => p.id === "bot-one");
     ok(back.goal === "unknown" && !back.hub_card && !back.hub_orig && back.last_activity === "2026-10-20", "removing a card must restore the collector row");
     writeJSON(path.join(dir, HUB), hub);
     sync(dir, { today: "2026-11-12" });
@@ -210,7 +210,7 @@ function selftest() {
 
     mkdirSync(path.join(radar, "stack"), { recursive: true });
     writeFileSync(path.join(radar, RADAR_INBOX), "# Project inbox\n\n- [x] 2026-11-01 · old · R-1\n- [ ] 2026-11-12 · new project: fire safety dashboard for a client · R-20261112-ab12\n");
-    writeJSON(path.join(dir, INBOX), { items: [{ at: "2026-11-12T01:00:00Z", source: "pc", text: "new folder ASEN/2_Clients/acme", done: false }, { at: "x", text: "done one", done: true }] });
+    writeJSON(path.join(dir, INBOX), { items: [{ at: "2026-11-12T01:00:00Z", source: "pc", text: "new folder Work/acme-site", done: false }, { at: "x", text: "done one", done: true }] });
     const w = work(dir, radar, { today: "2026-11-12", github: [{ full_name: "me/old", name: "old" }, { full_name: "me/new-site", name: "new-site", html_url: "https://github.com/me/new-site" }, { full_name: "me/fork", name: "fork", fork: true }] });
     ok(w.inbox.length === 2 && w.inbox[0].ref === "R-20261112-ab12" && w.inbox[0].line === 4, `inbox wrong: ${JSON.stringify(w.inbox)}`);
     ok(w.new_github_repos.length === 1 && w.new_github_repos[0].full_name === "me/new-site", "github discovery wrong");
