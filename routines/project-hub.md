@@ -1,4 +1,4 @@
-# Project Hub (daily, 11:17 and 17:47 IST)
+# Project Hub (daily, 11:47 and 17:47 IST)
 
 Goal: every project Aakash works on, code or not, past, current or future, is in **one list** and gets the system's full help without him asking. This routine finds new projects, writes each one's starting plan, nudges quiet projects and keeps lessons from finished ones. It runs as its own scheduled routine, "ASEN Project Hub", twice a day, and stops at once when there is nothing to do.
 
