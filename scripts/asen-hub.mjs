@@ -76,13 +76,26 @@ function hubRow(c) {
 // Collector rows keep their facts; a hub card with the same id or alias adds/overrides status, goal, next, kind and plan.
 export function mergeIndex(index, hub) {
   const cards = hub.projects || [];
-  const match = (row) => cards.find((c) => c.id === row.id || [c.name, ...(c.aliases || [])].some((a) => norm(a) && (row.aliases || [row.name, row.id]).some((b) => norm(b) === norm(a))));
+  // One card per row and one row per card: exact id first, then name/alias.
   const used = new Set();
-  const rows = (index?.projects || []).filter((r) => !r.hub).map((r) => {
-    const c = match(r);
+  // Undo an earlier merge first (the collector may not have rewritten the row since), so sync stays idempotent.
+  const base = (index?.projects || []).filter((r) => !r.hub).map((r) => {
+    if (!r.hub_orig) return r;
+    const { hub_orig: o, hub_card: _c, ...rest } = r;
+    return { ...rest, ...o };
+  });
+  const pick = new Map();
+  for (const r of base) { const c = cards.find((x) => x.id === r.id); if (c) { pick.set(r, c); used.add(c.id); } }
+  for (const r of base) {
+    if (pick.has(r)) continue;
+    const c = cards.find((x) => !used.has(x.id) && [x.name, ...(x.aliases || [])].some((a) => norm(a) && (r.aliases || [r.name, r.id]).some((b) => norm(b) === norm(a))));
+    if (c) { pick.set(r, c); used.add(c.id); }
+  }
+  const rows = base.map((r) => {
+    const c = pick.get(r);
     if (!c) return r;
-    used.add(c.id);
-    return { ...r, status: c.status || r.status, goal: c.goal || r.goal, next: c.next || r.next, problems: c.problems || r.problems,
+    const hub_orig = { status: r.status, goal: r.goal, next: r.next, problems: r.problems, kind: r.kind, plan: r.plan, last_activity: r.last_activity };
+    return { ...r, hub_orig, status: c.status || r.status, goal: c.goal || r.goal, next: c.next || r.next, problems: c.problems || r.problems,
       kind: c.kind || r.kind, plan: c.plan || r.plan || null, last_activity: [r.last_activity, c.last_activity].filter(Boolean).sort().at(-1) || null, hub_card: c.id };
   });
   for (const c of cards) if (!used.has(c.id)) rows.push(hubRow(c));
@@ -186,6 +199,12 @@ function selftest() {
     ok(r.created === 2, `expected 2 brain stubs (asen + personal), got ${r.created}`);
     sync(dir, { today: "2026-11-12" });
     ok(readJSON(path.join(dir, "brain/index.json")).projects.length === 5, "sync is not idempotent");
+    writeJSON(path.join(dir, HUB), { ...hub, projects: hub.projects.filter((c) => c.id !== "wa-ai-agent") });
+    sync(dir, { today: "2026-11-12" });
+    const back = readJSON(path.join(dir, "brain/index.json")).projects.find((p) => p.id === "wa-ai-agent");
+    ok(back.goal === "unknown" && !back.hub_card && !back.hub_orig && back.last_activity === "2026-10-20", "removing a card must restore the collector row");
+    writeJSON(path.join(dir, HUB), hub);
+    sync(dir, { today: "2026-11-12" });
     const ov = readFileSync(path.join(dir, "brain/OVERVIEW.md"), "utf8");
     ok(ov.startsWith("# Project Brain") && (ov.match(/hub:start/g) || []).length === 1 && ov.includes("Logo X"), "overview section wrong");
 
