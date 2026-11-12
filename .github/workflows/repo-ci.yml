@@ -30,6 +30,8 @@ jobs:
         run: python3 -c "import sys,yaml; [yaml.safe_load(open(f)) for f in sys.argv[1:]]; print('YAML ok')" $(git ls-files '*.yml' '*.yaml')
       - name: Scripts parse
         run: for f in $(git ls-files '*.mjs'); do node --check "$f"; done
+      - name: Project Hub self-test
+        run: node scripts/asen-hub.mjs selftest
       - name: Every knowledge fact has an official source and a date
         run: node scripts/ci/check-knowledge.mjs
       - name: Plugin and marketplace load correctly

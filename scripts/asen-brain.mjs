@@ -4,9 +4,12 @@
 //   node scripts/asen-brain.mjs status     print the overview
 // Which projects (Rule 0 + scope rule, Aakash 2026-10-02):
 //   - registered projects: always (read-only).
-//   - unregistered project folders: NEVER read. They get status "ask" in registry/brain-consent.json; the radar mailer sends
-//     ONE yes/no email listing them; Aakash's answers come back through the radar repo (mail/decisions/brain.json).
-//     yes → read-only facts like a registered project; no → excluded forever.
+//   - unregistered project folders (Aakash 2026-11-12: "automatic"): added AUTOMATICALLY as read-only ("yes", auto) and
+//     announced through the Project Hub inbox (brain/hub-inbox.json), which writes the project's card and starting plan and
+//     emails it. Client folders stay cloud_ok false: their facts never leave the client folder.
+//     Replying "no"/"remove" for a project by email (mail/decisions/brain.json) still excludes it forever.
+//   - every project, code or not, also lives in the Project Hub (brain/hub.json, scripts/asen-hub.mjs); its cards are
+//     merged into index.json and OVERVIEW.md here, so the hourly rewrite keeps them.
 // Facts only: new commits, changed files, dependency changes, the project's own README/CLAUDE.md/progress/TODO notes, new TODOs.
 // Claude writes the readable brain.md only when the facts changed (daily radar run, or a session that opens the project).
 
@@ -18,6 +21,7 @@ import path from "node:path";
 import { loadRegistry, registryFile } from "../hooks/lib/registry.mjs";
 import { brainDir, readBrain } from "../hooks/lib/brain.mjs";
 import { projectStack } from "../hooks/lib/knowledge.mjs";
+import { loadHub, mergeIndex, withOverview } from "./asen-hub.mjs";
 
 const PRIVATE = path.dirname(path.dirname(registryFile()));
 const ASEN = path.dirname(PRIVATE);
@@ -58,7 +62,7 @@ function brainProjects(consent) {
   return out;
 }
 
-// Unregistered folders the auto-register scan found (names only, never opened) → "ask"; apply email answers.
+// Unregistered folders the auto-register scan found → added automatically (read-only) + one Hub inbox line; apply email "no".
 function updateConsent(consent) {
   let changed = false;
   const reg = loadRegistry({ committed: false });
@@ -69,15 +73,23 @@ function updateConsent(consent) {
     if (f.decision === "registered" || f.decision === "yes") continue;
     const oid = opaque(relPath);
     if (!consent.projects[oid]) {
-      consent.projects[oid] = { name: path.basename(relPath), kind: f.kind === "client" ? "client" : "personal", rel: relPath, status: "ask", since: nowIso() };
+      const name = path.basename(relPath);
+      const kind = f.kind === "client" ? "client" : "personal";
+      consent.projects[oid] = { name, kind, rel: relPath, status: "yes", auto: true, id: slug(name), since: nowIso(), decided_at: nowIso() };
+      const inboxFile = path.join(PRIVATE, "brain", "hub-inbox.json");
+      const inbox = readJSON(inboxFile, { items: [] });
+      inbox.items.push({ at: nowIso(), source: "pc", text: `New project folder found on the PC: ${name} (${kind}, under ${relPath.split("/").slice(0, -1).join("/") || "AI_WORK"})`, ref: slug(name), done: false });
+      writeJSON(inboxFile, inbox);
+      log(`auto-added: ${name} (${kind})`);
       changed = true;
     }
   }
   const decisions = readJSON(path.join(RADAR, "mail", "decisions", "brain.json"), {});
   for (const [oid, d] of Object.entries(decisions)) {
     const c = consent.projects[oid];
-    if (!c || c.status === "yes" || c.status === "no") continue; // a decision is final
+    if (!c || c.status === "no" || (c.status === "yes" && !c.auto)) continue; // a human decision is final; "no" can undo an auto-add
     c.status = d.answer === "yes" ? "yes" : "no";
+    delete c.auto;
     c.decided_at = d.at || nowIso();
     if (c.status === "yes") c.id = slug(c.name);
     log(`consent: ${c.name} → ${c.status}`);
@@ -223,7 +235,10 @@ async function collect() {
       if (!prev || prev.signature !== f.signature || JSON.stringify(prev.docs) !== JSON.stringify(f.docs)) { writeJSON(file, f); changed++; }
     }
     writeJSON(path.join(LOG_DIR, "brain-state.json"), state);
-    const { md, index } = overview(projects);
+    const built = overview(projects);
+    const hub = loadHub(PRIVATE);
+    const index = mergeIndex(built.index, hub);
+    const md = withOverview(built.md, hub);
     const oldIndex = readJSON(path.join(PRIVATE, "brain", "index.json"), null);
     const strip = (x) => JSON.stringify({ ...x, updated: null });
     if (!oldIndex || strip(oldIndex) !== strip(index) || changed || consentChanged) {

@@ -2,6 +2,13 @@
 
 All notable changes to ASEN Engineering. Each merged PR is also tagged (`merge-<PR number>`), so any version can be restored.
 
+## 0.7.0 (2026-11-12)
+
+- **Project Hub**: one list of every project, code or not (websites, apps, logos, posters, pitches, outreach, content), past, current and future. Cards live in the private repo (`brain/hub.json`) and are merged into `brain/index.json`, so the daily brief, weekly projects pulse, research answers and session digests cover every project. `scripts/asen-hub.mjs` (sync, work, check, selftest).
+- **Automatic discovery**: new project folders on the PC are added by themselves (read-only; client folders stay private), new GitHub repos and project news in email replies become cards, and each new project gets a starting plan by email (best tools now, what to reuse, risks, first steps, a ready Claude Code prompt). Projects quiet for 14 days get one check-in; finished ones feed `brain/library.md`.
+- `/kickoff` uses the hub, the library and the radar leaderboards for the plan and adds the hub card.
+- **Monthly Self-Upgrade** on the 25th with autopilot (`routines/self-upgrade.md`).
+
 ## 0.6.0 (2026-10-16)
 
 - **Account check at every session start** (registered projects): the git push login, the gh token and the commit email are compared with the registry; for ASEN projects also the claude.ai GitHub connection (confirmed daily by the asen-radar watchdog in `raw/claude-connection.json`). A mismatch is printed at the very top of the session, and the **identity guard blocks pushes and GitHub writes** for that project until `scripts/asen-project.mjs check-accounts .` passes again.
