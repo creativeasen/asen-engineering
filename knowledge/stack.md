@@ -49,7 +49,7 @@ Every row was checked on an official source (see `sources.md`). Each row needs a
 
 | Item | Use | Latest seen | Notes | Source | Verified |
 | --- | --- | --- | --- | --- | --- |
-| n8n | 2.x | 2.44.6 (2026-10-22, latest stable; 2.45.x is pre-release) | Self-hosted: keep updated; n8n has had critical advisories. | https://github.com/n8n-io/n8n/releases | 2026-10-23 |
+| n8n | 2.x | 2.48.5 (2026-11-18, latest stable; 2.49.x is pre-release) | Self-hosted: keep updated; n8n has had critical advisories. | https://github.com/n8n-io/n8n/releases | 2026-11-19 |
 | Meta Graph API (WhatsApp Cloud API) | v26.0 | v27.0 (changelog lists it as latest; release date not shown); v26.0 introduced 2026-07-29 | v26.0 baseline stays until a reviewer approves v27 (needs-aakash). v25.0 available until 2028-07-29; v21.0 until 2027-01-21; v20.0 expired 2026-09-24. Pin the version in the URL. | https://developers.facebook.com/docs/graph-api/changelog/ | 2026-11-08 |
 | Razorpay Node SDK | `razorpay` 2.x | 2.9.8 | Webhooks: HMAC-SHA256 of the raw body in `X-Razorpay-Signature`; dedupe on `x-razorpay-event-id`. | https://razorpay.com/docs/webhooks/validate-test/ | 2026-09-24 |
 | Shopify Admin API | 2026-10 (latest stable) | 2027-01 is a release candidate (releases 2027-01-01) | Each version is supported for at least 12 months. 2026-10 is accessible until 2027-10-16; 2026-07 until 2027-07-16; 2026-01 until 2027-01-16. 2025-10 stopped being accessible on 2026-10-16. | https://shopify.dev/docs/api/usage/versioning | 2026-10-16 |
