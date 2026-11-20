@@ -2,6 +2,10 @@
 
 All notable changes to ASEN Engineering. Each merged PR is also tagged (`merge-<PR number>`), so any version can be restored.
 
+## Unreleased
+
+- **Rule 0 exceptions (HIGH, approved by Aakash in review):** global default GitHub account is now `creativeasen` (item 7); Aakash's user-level auto-save hook may commit + push after a gitleaks scan in all registered projects, ASEN system repos only to `autosave/pc` (items 3 and 9); Aakash's own `~/.claude/CLAUDE.md` may exist (item 8).
+
 ## 0.7.0 (2026-11-12)
 
 - **Project Hub**: one list of every project, code or not (websites, apps, logos, posters, pitches, outreach, content), past, current and future. Cards live in the private repo (`brain/hub.json`) and are merged into `brain/index.json`, so the daily brief, weekly projects pulse, research answers and session digests cover every project. `scripts/asen-hub.mjs` (sync, work, check, selftest).
