@@ -8,7 +8,8 @@ These rules apply to every project registered with ASEN Engineering (ASEN, perso
 - Each project uses only its registered GitHub account, writes only to its registered repos, and stays within its automation level (shown below under "This project").
 - Use `pgh` for gh commands (it picks the project's account), or `GH_TOKEN=$(gh auth token --user <account>) gh ...`.
 - Information never crosses between projects or clients. Nothing about clients or personal projects goes into the public `asen-engineering` repo.
-- Never run `gh auth switch|login|logout|setup-git`: the global default account never changes. Never add `-c` or `GIT_*` identity overrides.
+- Never run `gh auth switch|login|logout|setup-git`: the global default account (`creativeasen` since 2026-11-20) only changes through a HIGH-risk PR. Never add `-c` or `GIT_*` identity overrides.
+- Aakash's user-level auto-save hook commits and pushes after every response (Rule 0 items 3 and 9 exceptions). Don't fight it or duplicate it; just keep secrets out of files and keep `docs/STATUS.md` + `docs/CHANGELOG.md` current.
 - If the identity guard blocks something, stop and tell Aakash. Do not work around it.
 
 ## How we work

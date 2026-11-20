@@ -8,7 +8,7 @@ A self-updating engineering system for ASEN Agency. Every ASEN project starts at
 - **Skills**: detailed checklists per project type (website, SaaS, Shopify, mobile, n8n, AI features, Python bots) and per integration (Supabase, WhatsApp, Razorpay, Vercel/Railway, DPDP).
 - **Reviewers**: `security-reviewer`, `architect-reviewer`, `qa-tester`, and `knowledge-verifier` agents.
 - **Commands**: `/kickoff`, `/add-project`, `/remove-project`, `/rollback`, `/plan-feature`, `/audit`, `/prelaunch`, `/handover`, `/incident`, `/lesson`.
-- **Safety hooks** (read-only, never change files): identity guard, secret guard, gitleaks scan before commits, typecheck/lint after edits.
+- **Safety hooks** (read-only, never change files): identity guard, secret guard, gitleaks scan before commits, typecheck/lint after edits. (Separate from the plugin, Aakash's own auto-save hook commits and pushes his work after a gitleaks scan: see Rule 0 items 3 and 9.)
 - **Templates**: each project type gets CI (typecheck, lint, tests, gitleaks, dependency audit, Claude security review), `.gitignore`, `.env.example`, `SECURITY.md`, and a PR template.
 - **Knowledge**: `knowledge/` holds versions, deadlines, and model advice. Every fact has an official source link and a "verified" date.
 - **Cloud routines** (they run even when the PC is off): Daily Scout, Weekly Upgrade, PR Verifier, and Weekly Project Audit.
@@ -20,7 +20,7 @@ The full rules are in [`policy/risk-tiers.md`](policy/risk-tiers.md). In short:
 - The system works for ASEN, personal, and client projects, but **only projects you add with `/add-project`**. Nothing else is read or changed.
 - Each project uses **only its own GitHub account and repos**, and the AI only does what that project's automation level allows.
 - Information never crosses between projects or clients, and nothing about clients or personal projects ever appears in this public repo.
-- The global default GitHub account on your PC never changes.
+- The global default GitHub account on your PC is `creativeasen` and only changes through a HIGH-risk PR.
 - Changing Rule 0 is always HIGH risk.
 
 ## Project Profiles: which project uses which account
@@ -38,7 +38,7 @@ A private list, `registry/projects.json` in `asen-engineering-private`, holds on
 How it works:
 
 - **Commits and pushes**: for each registered project, git gets a rule for that folder only (generated into `~/.gitconfig-asen-profiles`). It pushes with that project's account token, which is fetched from the Windows keyring at the moment of pushing and never written to a file. ASEN projects commit with the account's GitHub noreply email; client and personal projects keep their current commit identity unless you choose otherwise.
-- **gh commands**: `pgh <command>` runs gh as the current project's account for that one command. (Long form: `GH_TOKEN=$(gh auth token --user <account>) gh <command>`.) Your global default account never changes.
+- **gh commands**: `pgh <command>` runs gh as the current project's account for that one command. (Long form: `GH_TOKEN=$(gh auth token --user <account>) gh <command>`.) Your global default account (`creativeasen`) only changes through a HIGH-risk PR.
 - **Identity guard**: before every `git push` or gh write, a read-only check looks the folder up in the registry and blocks the command unless it uses exactly that project's account, targets one of its repos, and fits its automation level. Unregistered folders are blocked. It reads the registry as committed, so an unsaved edit can't widen access.
 - **Account check**: every session in a registered project starts by comparing the git, gh and (for ASEN projects) claude.ai GitHub accounts with the registry. A mismatch is shown at the top of the session and the identity guard blocks pushes and GitHub writes until `node scripts/asen-project.mjs check-accounts .` passes.
 - **Client and personal projects** enable the plugin in `.claude/settings.local.json`, which is never committed. Nothing ASEN-related lands in their repos.
