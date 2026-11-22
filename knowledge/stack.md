@@ -38,8 +38,8 @@ Every row was checked on an official source (see `sources.md`). Each row needs a
 | Supabase JS | `@supabase/supabase-js` 2.x | 2.118.0 | | https://registry.npmjs.org/@supabase%2Fsupabase-js/latest | 2026-10-25 |
 | Supabase CLI | `supabase` 2.x | 2.122.0 | Migrations live in `supabase/migrations`. | https://registry.npmjs.org/supabase/latest | 2026-10-25 |
 | Supabase API keys | Publishable (`sb_publishable_...`) in clients, Secret (`sb_secret_...`) only on servers | — | Legacy `anon` / `service_role` JWT keys are being deprecated by end of 2026. New projects: use new keys only. | https://supabase.com/docs/guides/api/api-keys | 2026-11-08 |
-| Valkey | 9.x | 9.1.2 (2026-09-01) | Open-source Redis-compatible server. Redis 8.10.2 also current. | https://github.com/valkey-io/valkey/releases | 2026-09-24 |
-| Redis | 8.x | 8.10.2 (2026-09-17) | | https://github.com/redis/redis/releases | 2026-09-24 |
+| Valkey | 9.x | 9.2.0 (2026-11-18) | Open-source Redis-compatible server. Redis 8.10.3 also current. | https://github.com/valkey-io/valkey/releases | 2026-11-22 |
+| Redis | 8.x | 8.10.3 (2026-10-26) | 8.12 is at release-candidate stage only. | https://github.com/redis/redis/releases | 2026-11-22 |
 | BullMQ | 6.x | 6.4.2 | Queues for all bulk work. | https://registry.npmjs.org/bullmq/latest | 2026-10-25 |
 | ioredis | 6.x | 6.0.0 | Client used by BullMQ. | https://registry.npmjs.org/ioredis/latest | 2026-10-25 |
 | Zod | 4.x | 4.6.7 | Validate every boundary. | https://registry.npmjs.org/zod/latest | 2026-10-25 |
@@ -52,7 +52,7 @@ Every row was checked on an official source (see `sources.md`). Each row needs a
 | n8n | 2.x | 2.48.5 (2026-11-18, latest stable; 2.49.x is pre-release) | Self-hosted: keep updated; n8n has had critical advisories. | https://github.com/n8n-io/n8n/releases | 2026-11-19 |
 | Meta Graph API (WhatsApp Cloud API) | v26.0 | v27.0 (changelog lists it as latest; release date not shown); v26.0 introduced 2026-07-29 | v26.0 baseline stays until a reviewer approves v27 (needs-aakash). v25.0 available until 2028-07-29; v21.0 until 2027-01-21; v20.0 expired 2026-09-24. Pin the version in the URL. | https://developers.facebook.com/docs/graph-api/changelog/ | 2026-11-08 |
 | Razorpay Node SDK | `razorpay` 2.x | 2.9.8 | Webhooks: HMAC-SHA256 of the raw body in `X-Razorpay-Signature`; dedupe on `x-razorpay-event-id`. | https://razorpay.com/docs/webhooks/validate-test/ | 2026-09-24 |
-| Shopify Admin API | 2026-10 (latest stable) | 2027-01 is a release candidate (releases 2027-01-01) | Each version is supported for at least 12 months. 2026-10 is accessible until 2027-10-16; 2026-07 until 2027-07-16; 2026-01 until 2027-01-16. 2025-10 stopped being accessible on 2026-10-16. | https://shopify.dev/docs/api/usage/versioning | 2026-10-16 |
+| Shopify Admin API | 2026-10 (latest stable) | 2027-01 is a release candidate (accessible until 2028-01-16) | Each version is supported for at least 12 months. 2026-10 is accessible until 2027-10-16; 2026-07 until 2027-07-16; 2026-04 until 2027-04-16; 2026-01 until 2027-01-16. 2025-10 stopped being accessible on 2026-10-16. | https://shopify.dev/docs/api/usage/versioning | 2026-11-22 |
 | Shopify API library | `@shopify/shopify-api` 15.x | 15.0.1 | | https://registry.npmjs.org/@shopify%2Fshopify-api/latest | 2026-10-25 |
 | Shopify CLI | `@shopify/cli` 4.x | 4.9.4 | | https://registry.npmjs.org/@shopify%2Fcli/latest | 2026-10-25 |
 | Resend | `resend` 6.x | 6.34.1 | Transactional email. | https://registry.npmjs.org/resend/latest | 2026-10-25 |
@@ -85,13 +85,13 @@ Every row was checked on an official source (see `sources.md`). Each row needs a
 | Playwright | `@playwright/test` 1.x | 1.64.1 | E2E + mobile viewport tests. | https://registry.npmjs.org/@playwright%2Ftest/latest | 2026-10-25 |
 | Ruff (Python) | 0.16.x | 0.17.2 | Lint + format for Python. 0.17.x is out; 0.16.x stays the baseline until reviewed. | https://pypi.org/project/ruff/ | 2026-10-25 |
 | pytest (Python) | 9.x | 9.1.1 | | https://pypi.org/project/pytest/ | 2026-10-25 |
-| gitleaks | 8.x | 8.30.1 | Secret scanning locally and in CI. | https://github.com/gitleaks/gitleaks/releases | 2026-09-24 |
+| gitleaks | 8.x | 8.30.1 (2026-03-21) | Secret scanning locally and in CI. | https://github.com/gitleaks/gitleaks/releases | 2026-11-22 |
 
 ## CI actions (pin by commit SHA)
 
 | Action | Version | Commit SHA | Source | Verified |
 | --- | --- | --- | --- | --- |
-| actions/checkout | v7.0.1 | 3d3c42e5aac5ba805825da76410c181273ba90b1 | https://github.com/actions/checkout/releases | 2026-09-24 |
+| actions/checkout | v7.0.1 | 3d3c42e5aac5ba805825da76410c181273ba90b1 | https://github.com/actions/checkout/releases | 2026-11-22 |
 | actions/setup-node | v7.0.0 | 820762786026740c76f36085b0efc47a31fe5020 | https://github.com/actions/setup-node/releases | 2026-09-24 |
 | actions/setup-python | v6 | ece7cb06caefa5fff74198d8649806c4678c61a1 | https://github.com/actions/setup-python/releases | 2026-09-24 |
 | anthropics/claude-code-action | v1 | 8cf3482550831fb35a4fc3fbf7ca139cf8028b4c | https://github.com/anthropics/claude-code-action | 2026-09-24 |
