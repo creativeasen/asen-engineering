@@ -6,8 +6,6 @@ Severity: **critical** (act now), **high** (act this week), **medium** (plan it)
 
 | Date | Item | Severity | Action for ASEN projects | Source | Verified |
 | --- | --- | --- | --- | --- | --- |
-| 2026-09-23 → mid-Oct 2026 | WhatsApp Business accounts move to a new account model (phased rollout) | medium | Existing IDs, endpoints, and tokens keep working. Coexistence onboarding now needs the `account_update` webhook subscription. | https://developers.facebook.com/docs/whatsapp/business-platform/changelog/ | 2026-09-24 |
-| 2026-10-01 | WhatsApp service and utility pricing changes; new pricing webhook/analytics values | medium | Check cost dashboards and any code that parses pricing webhooks. | https://developers.facebook.com/docs/whatsapp/business-platform/changelog/ | 2026-09-24 |
 | 2026-10-01 | Vercel deprecates Node.js 20 | high | Set `"engines": {"node": "24.x"}` in every Vercel project. | https://vercel.com/docs/functions/runtimes/node-js/node-js-versions | 2026-09-24 |
 | 2026-11-30 | Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) retired on the Claude API (deprecated 2026-09-30) | high | Move any usage to `claude-sonnet-5-5` before then. | https://platform.claude.com/docs/en/about-claude/model-deprecations | 2026-11-15 |
 | By end of 2026 | Supabase deprecates legacy `anon` / `service_role` keys | high | Migrate to publishable / secret keys; remove any `eyJ...` keys from config. | https://supabase.com/docs/guides/api/api-keys | 2026-11-08 |
